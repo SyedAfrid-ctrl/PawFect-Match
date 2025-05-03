@@ -23,6 +23,14 @@
   </div>
 
   <script>
+  // Auth-based UI logic for search page
+  document.addEventListener('DOMContentLoaded', function () {
+    const token = localStorage.getItem('token');
+    const searchContainer = document.getElementById('searchContainer');
+    if (!token && searchContainer) {
+      searchContainer.innerHTML = '<div class="text-center text-red-600 font-semibold py-12">You must be logged in to search for pets.</div>';
+    }
+  });
     async function fetchPets(query = '') {
       const res = await fetch(`http://localhost:5000/api/pets${query}`);
       const pets = await res.json();

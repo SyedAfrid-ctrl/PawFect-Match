@@ -1,23 +1,34 @@
+// Log incoming requests for debugging
+app.use((req, res, next) => {
+  console.log(req.method, req.url, req.headers['content-type'], req.headers['content-length']);
+  next();
+});
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const authRoutes = require('./routes/auth');
 const petRoutes = require('./routes/pets');
 const adoptionsRoutes = require('./routes/adoptions');
+const storiesRoutes = require('./routes/stories');
 const cors = require('cors');
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000
 
 // Middleware
 app.use(cors({
-  origin: 'http://127.0.0.1:5500', // your frontend origin
+  origin: [
+    'http://127.0.0.1:5500',
+    'http://localhost:5500',
+    'http://127.0.0.1:5501',
+    'http://localhost:5501'
+  ],
   methods: ['GET', 'POST'],
-  allowedHeaders: ['Content-Type']
+  allowedHeaders: ['Content-Type'],
+  credentials: true
 }));
-app.use(express.json());
-app.use(express.static('public'));
-app.use('/uploads', express.static('uploads'));
+app.use(express.json({ limit: '100mb' }));
+app.use(express.urlencoded({ limit: '100mb', extended: true }));
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGO_URI, {
@@ -26,9 +37,14 @@ mongoose.connect(process.env.MONGO_URI, {
 }).then(() => console.log('MongoDB connected')).catch(err => console.error(err));
 
 // Routes
-app.use('/routes/auth', authRoutes);
-app.use('/routes/pets', petRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/pets', petRoutes);
 app.use('/api/adoptions', adoptionsRoutes);
+app.use('/api/stories', storiesRoutes);
+
+// Static file serving should come after API routes
+app.use(express.static('public'));
+app.use('/uploads', express.static('uploads'));
 
 // Add filtering for pets by type, age, and location
 app.get('/api/pets', async (req, res) => {

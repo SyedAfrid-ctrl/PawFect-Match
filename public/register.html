@@ -42,7 +42,7 @@
       const password = document.getElementById('password').value;
 
       try {
-        const res = await fetch('http://localhost:5000/api/auth/register', {
+        const res = await fetch('http://127.0.0.1:5000/api/auth/register', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ username, email, password })
@@ -52,7 +52,7 @@
 
         if (res.ok) {
           alert('Registration successful! Redirecting to login page...');
-          window.location.href = 'xlogin.html'; // Adjust if needed
+          window.location.href = 'login.html'; // Adjust if needed
         } else {
           message.textContent = data.error || 'Something went wrong.';
         }

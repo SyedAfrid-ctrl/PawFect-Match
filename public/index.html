@@ -8,11 +8,24 @@
     <script src="https://cdn.tailwindcss.com/3.4.16"></script>
     <script>tailwind.config = { theme: { extend: { colors: { primary: '#6366f1', secondary: '#f97316' }, borderRadius: { 'none': '0px', 'sm': '4px', DEFAULT: '8px', 'md': '12px', 'lg': '16px', 'xl': '20px', '2xl': '24px', '3xl': '32px', 'full': '9999px', 'button': '8px' } } } }</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>     
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="css/style.css" rel="stylesheet">
 </head>
 
 <body class="bg-gray-50">
+    <!-- Login Required Popup -->
+    <div id="loginRequiredPopup"
+        class="fixed inset-0 bg-black bg-opacity-40 z-50 hidden flex items-center justify-center">
+        <div class="bg-white rounded-lg shadow-lg p-6 max-w-xs w-full mx-4 flex flex-col items-center">
+            <div class="w-12 h-12 flex items-center justify-center bg-primary/10 rounded-full mb-4">
+                <i class="ri-error-warning-line text-3xl text-primary"></i>
+            </div>
+            <h3 class="text-lg font-bold text-gray-900 mb-2">Login Required</h3>
+            <p class="text-gray-700 mb-4 text-center">You must be logged in to use this feature.</p>
+            <button id="closeLoginRequiredPopup"
+                class="bg-primary text-white px-4 py-2 rounded-button font-medium hover:bg-primary/90">Close</button>
+        </div>
+    </div>
     <!-- Navigation -->
     <nav class="bg-white shadow-sm fixed w-full z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -26,22 +39,47 @@
                     </a>
                     <div class="hidden md:ml-10 md:flex md:space-x-8">
                         <a href="#" class="text-primary border-b-2 border-primary px-1 pt-1 font-medium">Home</a>
-                        <a href="search.html" class="text-gray-700 hover:text-primary px-1 pt-1 font-medium">Search Pets</a>
-                        <a href="#" class="text-gray-700 hover:text-primary px-1 pt-1 font-medium">Success Stories</a>
-                        <a href="#" class="text-gray-700 hover:text-primary px-1 pt-1 font-medium">About Us</a>
-                        <a href="#" class="text-gray-700 hover:text-primary px-1 pt-1 font-medium">Contact</a>
+                        <a href="search.html" class="text-gray-700 hover:text-primary px-1 pt-1 font-medium"
+                            id="searchNavLink">Search Pets</a>
+                        <a href="stories.html" class="text-gray-700 hover:text-primary px-1 pt-1 font-medium"
+                            id="storiesNavLink">Pawfect Stories</a>
+                        <a href="#" class="text-gray-700 hover:text-primary px-1 pt-1 font-medium"
+                            id="aboutNavLink">About Us</a>
+                        <a href="#" class="text-gray-700 hover:text-primary px-1 pt-1 font-medium"
+                            id="contactNavLink">Contact</a>
+                        <!-- Login Required Popup -->
+                        <div id="loginRequiredPopup"
+                            class="fixed inset-0 bg-black bg-opacity-40 z-50 hidden flex items-center justify-center">
+                            <div
+                                class="bg-white rounded-lg shadow-lg p-6 max-w-xs w-full mx-4 flex flex-col items-center">
+                                <div class="w-12 h-12 flex items-center justify-center bg-primary/10 rounded-full mb-4">
+                                    <i class="ri-error-warning-line text-3xl text-primary"></i>
+                                </div>
+                                <h3 class="text-lg font-bold text-gray-900 mb-2">Login Required</h3>
+                                <p class="text-gray-700 mb-4 text-center">You must be logged in to use this feature.</p>
+                                <button id="closeLoginRequiredPopup"
+                                    class="bg-primary text-white px-4 py-2 rounded-button font-medium hover:bg-primary/90">Close</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="flex items-center">
-                    <a href="login.html">
-                        <button class="bg-white text-primary border border-primary px-4 py-2 !rounded-button font-medium mr-3 whitespace-nowrap hover:bg-gray-50">Log
+                    <a href="login.html" id="loginNavBtn">
+                        <button
+                            class="bg-white text-primary border border-primary px-4 py-2 !rounded-button font-medium mr-3 whitespace-nowrap hover:bg-gray-50">Log
                             In</button>
                     </a>
-                    <a href="register.html">
-                        <button class="bg-primary text-white px-4 py-2 !rounded-button font-medium whitespace-nowrap hover:bg-primary/90">Register</button>
+                    <a href="register.html" id="registerNavBtn">
+                        <button
+                            class="bg-primary text-white px-4 py-2 !rounded-button font-medium whitespace-nowrap hover:bg-primary/90">Register</button>
                     </a>
+                    <span id="navUsername" class="ml-4 text-primary font-semibold hidden"></span>
+                    <button id="logoutBtn"
+                        class="ml-3 bg-gray-200 text-gray-700 px-4 py-2 rounded-button font-medium hover:bg-gray-300 hidden">Logout</button>
                     <a href="listing.html">
-                        <button class="bg-primary text-white px-4 py-2 !rounded-button font-medium whitespace-nowrap hover:bg-primary/90 ml-3">List a Pet</button>
+                        <button
+                            class="bg-primary text-white px-4 py-2 !rounded-button font-medium whitespace-nowrap hover:bg-primary/90 ml-3"
+                            id="listPetNavBtn">List a Pet</button>
                     </a>
                     <div class="ml-4 flex items-center md:hidden">
                         <button
@@ -287,39 +325,35 @@
                         <img src="https://readdy.ai/api/search-image?query=A%20beautiful%20tabby%20cat%20with%20striking%20green%20eyes%2C%20sitting%20elegantly%20on%20a%20clean%20white%20background.%20The%20cat%20has%20a%20sleek%20coat%20with%20classic%20tabby%20markings%2C%20perky%20ears%2C%20and%20a%20gentle%20expression.%20The%20lighting%20is%20bright%20and%20even%2C%20highlighting%20the%20cats%20features.%20The%20image%20is%20high%20quality%20and%20professional%2C%20perfect%20for%20a%20pet%20adoption%20website.&width=500&height=500&seq=pet2&orientation=squarish"
                             alt="Luna - Tabby Cat" class="w-full h-full object-cover object-top">
                         <div class="absolute top-3 right-3">
-                            <button id="favBtn"
-                                class="w-8 h-8 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center text-gray-600 hover:text-primary transition-colors">
+                            <button
+                                class="favBtn w-8 h-8 bg-white/80 backdrop-blur-sm rounded-full flex items-center justify-center text-gray-600 hover:text-primary transition-colors">
                                 <i class="ri-heart-line"></i>
                             </button>
-
                             <!-- Toast Notification -->
-                            <div id="toast"
-                                class="fixed top-4 right-4 bg-white rounded-lg shadow-lg p-4 flex items-center justify-between z-50 transform translate-x-full transition-transform duration-300">
+                            <div
+                                class="toast fixed top-4 right-4 bg-white rounded-lg shadow-lg p-4 flex items-center justify-between z-50 transform translate-x-full transition-transform duration-300">
                                 <div class="flex items-center">
                                     <div class="w-6 h-6 flex items-center justify-center text-primary">
                                         <i class="ri-heart-fill"></i>
                                     </div>
                                     <span class="ml-2 text-gray-700">Pet added to favorites</span>
                                 </div>
-                                <button id="viewFavoritesBtn"
-                                    class="ml-4 text-primary text-sm font-medium hover:text-primary/80">View all
-                                    favorites</button>
+                                <button
+                                    class="viewFavoritesBtn ml-4 text-primary text-sm font-medium hover:text-primary/80">View
+                                    all favorites</button>
                             </div>
-
                             <!-- Login Modal -->
-                            <div id="loginModal"
-                                class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
+                            <div
+                                class="loginModal fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
                                 <div class="bg-white rounded-lg p-6 max-w-sm w-full mx-4">
                                     <h3 class="text-xl font-bold text-gray-900 mb-4">Login Required</h3>
                                     <p class="text-gray-600 mb-6">Please log in or register to save pets to your
                                         favorites list.</p>
                                     <div class="flex gap-4">
-                                        <button
-                                            onclick="window.location.href='https://readdy.ai/home/267a651b-6e77-4d5c-8eb7-8df2fd63f522/0f0d4d64-47ac-4223-a0bb-5130491d96fe'"
+                                        <button onclick="window.location.href='login.html'"
                                             class="flex-1 bg-primary text-white px-4 py-2 !rounded-button font-medium whitespace-nowrap hover:bg-primary/90">Log
                                             In</button>
-                                        <button
-                                            onclick="window.location.href='https://readdy.ai/home/267a651b-6e77-4d5c-8eb7-8df2fd63f522/ac44c81c-427d-43db-ab23-9eb233dfed9e'"
+                                        <button onclick="window.location.href='register.html'"
                                             class="flex-1 bg-white border border-gray-300 text-gray-700 px-4 py-2 !rounded-button font-medium whitespace-nowrap hover:bg-gray-50">Register</button>
                                     </div>
                                 </div>
@@ -1221,159 +1255,384 @@
         </button>
     </div>
     <script>
+        // Show login required popup
+        function showLoginRequiredPopup() {
+            const popup = document.getElementById('loginRequiredPopup');
+            if (popup) popup.classList.remove('hidden');
+        }
         document.addEventListener('DOMContentLoaded', function () {
-            // Custom checkbox functionality
-            const checkboxes = document.querySelectorAll('.custom-checkbox');
-            checkboxes.forEach(checkbox => {
-                checkbox.addEventListener('click', function () {
-                    this.classList.toggle('checked');
-                });
-            });
-
-            // Favorite button functionality
-            const favBtn = document.getElementById('favBtn');
-            const toast = document.getElementById('toast');
-            const loginModal = document.getElementById('loginModal');
-            let isLoggedIn = false; // This should be replaced with actual auth check
-            let isFavorited = false;
-
-            if (favBtn) {
-                favBtn.addEventListener('click', function () {
-                    if (!isLoggedIn) {
-                        loginModal.classList.remove('hidden');
-                        return;
-                    }
-
-                    isFavorited = !isFavorited;
-                    const icon = this.querySelector('i');
-
-                    if (isFavorited) {
-                        icon.classList.remove('ri-heart-line');
-                        icon.classList.add('ri-heart-fill');
-                        this.classList.add('text-primary');
-
-                        // Show toast
-                        toast.classList.remove('translate-x-full');
-                        setTimeout(() => {
-                            toast.classList.add('translate-x-full');
-                        }, 3000);
+            // Block "List a Pet" for logged-out users (always enforce, even if button is re-rendered)
+            const listPetBtn = document.getElementById('listPetNavBtn');
+            function enforceListPetAuth() {
+                const token = localStorage.getItem('token');
+                if (listPetBtn) {
+                    if (!token) {
+                        listPetBtn.addEventListener('click', listPetHandler);
+                        listPetBtn.setAttribute('href', '#');
+                        listPetBtn.classList.add('cursor-not-allowed');
                     } else {
-                        icon.classList.remove('ri-heart-fill');
-                        icon.classList.add('ri-heart-line');
-                        this.classList.remove('text-primary');
+                        listPetBtn.removeEventListener('click', listPetHandler);
+                        listPetBtn.classList.remove('cursor-not-allowed');
                     }
+                }
+            }
+            function listPetHandler(e) {
+                e.preventDefault();
+                showLoginRequiredPopup();
+            }
+            enforceListPetAuth();
+            // If you ever re-render nav, call enforceListPetAuth() again
+            const popup = document.getElementById('loginRequiredPopup');
+            const closeBtn = document.getElementById('closeLoginRequiredPopup');
+            if (closeBtn && popup) {
+                closeBtn.addEventListener('click', function () {
+                    popup.classList.add('hidden');
                 });
             }
-
-            // Close login modal when clicking outside
-            if (loginModal) {
-                loginModal.addEventListener('click', function (e) {
-                    if (e.target === loginModal) {
-                        loginModal.classList.add('hidden');
-                    }
-                });
-            }
-
-            // View favorites button
-            const viewFavoritesBtn = document.getElementById('viewFavoritesBtn');
-            if (viewFavoritesBtn) {
-                viewFavoritesBtn.addEventListener('click', function () {
-                    // Add navigation to favorites page
-                    console.log('Navigate to favorites page');
-                    toast.classList.add('translate-x-full');
-                });
-            }
-        });
-        document.addEventListener('DOMContentLoaded', function () {
-            // Custom switch functionality
-            const switches = document.querySelectorAll('.custom-switch input');
-            switches.forEach(switchInput => {
-                switchInput.addEventListener('change', function () {
-                    // Switch state is handled by CSS
-                });
+            // Also close popup on ESC
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && popup && !popup.classList.contains('hidden')) {
+                    popup.classList.add('hidden');
+                }
             });
         });
+        // Disable nav and main features if not logged in
         document.addEventListener('DOMContentLoaded', function () {
-            // Mobile menu toggle
-            const menuButton = document.querySelector('button[aria-label="Menu"]');
-            const mobileMenu = document.querySelector('.mobile-menu');
-            if (menuButton && mobileMenu) {
-                menuButton.addEventListener('click', function () {
-                    mobileMenu.classList.toggle('hidden');
-                });
+            const token = localStorage.getItem('token');
+            // Nav links
+            const searchNav = document.getElementById('searchNavLink');
+            const storiesNav = document.getElementById('storiesNavLink');
+            const aboutNav = document.getElementById('aboutNavLink');
+            const contactNav = document.getElementById('contactNavLink');
+            if (!token) {
+                if (searchNav) searchNav.addEventListener('click', function (e) { e.preventDefault(); showLoginRequiredPopup(); });
+                if (storiesNav) storiesNav.addEventListener('click', function (e) { e.preventDefault(); showLoginRequiredPopup(); });
+                if (aboutNav) aboutNav.addEventListener('click', function (e) { e.preventDefault(); showLoginRequiredPopup(); });
+                if (contactNav) contactNav.addEventListener('click', function (e) { e.preventDefault(); showLoginRequiredPopup(); });
             }
-            // Chat modal functionality
-            const startChatBtn = document.getElementById('startChatBtn');
-            const chatModal = document.getElementById('chatModal');
-            const closeChatModal = document.getElementById('closeChatModal');
-            const shelterSearch = document.getElementById('shelterSearch');
-            const shelterList = document.getElementById('shelterList');
-            if (startChatBtn && chatModal) {
-                startChatBtn.addEventListener('click', function () {
-                    chatModal.classList.remove('hidden');
-                    document.body.style.overflow = 'hidden';
-                });
+            // Disable chat button
+            const chatBtn = document.querySelector('.fixed.bottom-6.right-6 button');
+            if (!token && chatBtn) {
+                chatBtn.addEventListener('click', function (e) { e.preventDefault(); showLoginRequiredPopup(); });
             }
-            if (closeChatModal && chatModal) {
-                closeChatModal.addEventListener('click', function () {
-                    chatModal.classList.add('hidden');
-                    document.body.style.overflow = '';
-                });
-                // Close modal when clicking outside
-                chatModal.addEventListener('click', function (e) {
-                    if (e.target === chatModal) {
-                        chatModal.classList.add('hidden');
-                        document.body.style.overflow = '';
-                    }
-                });
-            }
-            if (shelterSearch) {
-                shelterSearch.addEventListener('input', function (e) {
-                    const searchTerm = e.target.value.toLowerCase();
-                    const shelters = shelterList.querySelectorAll('.bg-gray-50');
-                    shelters.forEach(shelter => {
-                        const shelterName = shelter.querySelector('h4').textContent.toLowerCase();
-                        const shelterDesc = shelter.querySelector('p').textContent.toLowerCase();
-                        if (shelterName.includes(searchTerm) || shelterDesc.includes(searchTerm)) {
-                            shelter.style.display = '';
-                        } else {
-                            shelter.style.display = 'none';
-                        }
-                    });
-                });
-            }
-            // Chat Now button functionality
-            const chatNowButtons = document.querySelectorAll('#shelterList button');
-            chatNowButtons.forEach(button => {
-                button.addEventListener('click', function () {
-                    const shelterName = this.closest('.bg-gray-50').querySelector('h4').textContent;
-                    chatModal.classList.add('hidden');
-                    document.body.style.overflow = '';
-                    // Here you can add logic to open the chat interface with the selected shelter
-                });
-            });
-        });
-        document.addEventListener('DOMContentLoaded', function () {
-            // Find the search button in the hero section
+            // Disable hero search if not logged in
             const searchButton = document.querySelector('.bg-primary.text-white.px-6.py-2');
-            // Find the location input and pet type select
-            const locationInput = document.querySelector('input[placeholder="Enter your location"]');
-            const petTypeSelect = document.querySelector('select');
-
-            if (searchButton && locationInput && petTypeSelect) {
+            if (!token && searchButton) {
                 searchButton.addEventListener('click', function (e) {
                     e.preventDefault();
-                    const location = encodeURIComponent(locationInput.value.trim());
-                    const petType = encodeURIComponent(petTypeSelect.value);
-                    // Build query string
-                    let query = [];
-                    if (location) query.push(`location=${location}`);
-                    if (petType) query.push(`type=${petType}`);
-                    const queryString = query.length ? `?${query.join('&')}` : '';
-                    window.location.href = `search.html${queryString}`;
+                    showLoginRequiredPopup();
                 });
             }
         });
+        // Show login required popup
+        function showLoginRequiredPopup() {
+            const popup = document.getElementById('loginRequiredPopup');
+            if (popup) popup.classList.remove('hidden');
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+            const popup = document.getElementById('loginRequiredPopup');
+            const closeBtn = document.getElementById('closeLoginRequiredPopup');
+            if (closeBtn && popup) {
+                closeBtn.addEventListener('click', function () {
+                    popup.classList.add('hidden');
+                });
+            }
+            // Also close popup on ESC
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && popup && !popup.classList.contains('hidden')) {
+                    popup.classList.add('hidden');
+                }
+            });
+        });
+                        <a href="search.html" class="text-gray-700 hover:text-primary px-1 pt-1 font-medium" id="searchNavLink">Search Pets</a>
+                        <a href="#" class="text-gray-700 hover:text-primary px-1 pt-1 font-medium" id="storiesNavLink">Success Stories</a>
+                        <a href="#" class="text-gray-700 hover:text-primary px-1 pt-1 font-medium" id="aboutNavLink">About Us</a>
+                        <a href="#" class="text-gray-700 hover:text-primary px-1 pt-1 font-medium" id="contactNavLink">Contact</a>
+        // Disable nav and main features if not logged in
+        document.addEventListener('DOMContentLoaded', function () {
+            const token = localStorage.getItem('token');
+            // Nav links
+            const searchNav = document.getElementById('searchNavLink');
+            const storiesNav = document.getElementById('storiesNavLink');
+            const aboutNav = document.getElementById('aboutNavLink');
+            const contactNav = document.getElementById('contactNavLink');
+            if (!token) {
+                if (searchNav) searchNav.addEventListener('click', function (e) { e.preventDefault(); showLoginRequiredPopup(); });
+                if (storiesNav) storiesNav.addEventListener('click', function (e) { e.preventDefault(); showLoginRequiredPopup(); });
+                if (aboutNav) aboutNav.addEventListener('click', function (e) { e.preventDefault(); showLoginRequiredPopup(); });
+                if (contactNav) contactNav.addEventListener('click', function (e) { e.preventDefault(); showLoginRequiredPopup(); });
+            }
+            // Disable chat button
+            const chatBtn = document.querySelector('.fixed.bottom-6.right-6 button');
+            if (!token && chatBtn) {
+                chatBtn.addEventListener('click', function (e) { e.preventDefault(); showLoginRequiredPopup(); });
+            }
+        });
+        <script>
+                        // Disable hero search if not logged in
+            document.addEventListener('DOMContentLoaded', function () {
+                            const token = localStorage.getItem('token');
+            const searchButton = document.querySelector('.bg-primary.text-white.px-6.py-2');
+            if (!token && searchButton) {
+                searchButton.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    showLoginRequiredPopup();
+                });
+                            }
+                        });
+    </script>
+    <!-- Login-required feature gating script (single instance, keep this one) -->
+    <script>
+                            function showLoginRequiredPopup() {
+        const popup = document.getElementById('loginRequiredPopup');
+                            if (popup) popup.classList.remove('hidden');
+    }
+                            document.addEventListener('DOMContentLoaded', function () {
+        const popup = document.getElementById('loginRequiredPopup');
+                            const closeBtn = document.getElementById('closeLoginRequiredPopup');
+                            if (closeBtn && popup) {
+                                closeBtn.addEventListener('click', function () {
+                                    popup.classList.add('hidden');
+                                });
+        }
+                            // Also close popup on ESC
+                            document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && popup && !popup.classList.contains('hidden')) {
+                                popup.classList.add('hidden');
+            }
+        });
+
+                            const token = localStorage.getItem('token');
+                            // Nav links
+                            const searchNav = document.getElementById('searchNavLink');
+                            const storiesNav = document.getElementById('storiesNavLink');
+                            const aboutNav = document.getElementById('aboutNavLink');
+                            const contactNav = document.getElementById('contactNavLink');
+                            if (!token) {
+            if (searchNav) searchNav.addEventListener('click', function(e) {e.preventDefault(); showLoginRequiredPopup(); });
+                            if (storiesNav) storiesNav.addEventListener('click', function(e) {e.preventDefault(); showLoginRequiredPopup(); });
+                            if (aboutNav) aboutNav.addEventListener('click', function(e) {e.preventDefault(); showLoginRequiredPopup(); });
+                            if (contactNav) contactNav.addEventListener('click', function(e) {e.preventDefault(); showLoginRequiredPopup(); });
+        }
+                            // Disable chat button
+                            const chatBtn = document.querySelector('.fixed.bottom-6.right-6 button');
+                            if (!token && chatBtn) {
+                                chatBtn.addEventListener('click', function (e) { e.preventDefault(); showLoginRequiredPopup(); });
+        }
+                            // Disable hero search if not logged in
+                            const searchButton = document.querySelector('.bg-primary.text-white.px-6.py-2');
+                            if (!token && searchButton) {
+                                searchButton.addEventListener('click', function (e) {
+                                    e.preventDefault();
+                                    showLoginRequiredPopup();
+                                });
+        }
+    });
+    
+
+    // Auth-based UI logic
+    // Helper: check if user is logged in (adjust as needed for your auth logic)
+    function isLoggedIn() {
+    return !!localStorage.getItem('token'); // or whatever key you use for auth
+    }
+
+    // Favorite button logic for all cards
+    document.addEventListener('DOMContentLoaded', function () {
+    // Custom checkbox functionality
+    const checkboxes = document.querySelectorAll('.custom-checkbox');
+    checkboxes.forEach(checkbox => {
+    checkbox.addEventListener('click', function () {
+    this.classList.toggle('checked');
+    });
+    });
+
+    // Favorite button logic
+    document.querySelectorAll('.pet-card').forEach(function(card) {
+    const favBtn = card.querySelector('.favBtn');
+    const toast = card.querySelector('.toast');
+    const loginModal = card.querySelector('.loginModal');
+    let isFavorited = false;
+    if (favBtn) {
+    favBtn.addEventListener('click', function (e) {
+    if (!isLoggedIn()) {
+    e.preventDefault();
+    if (loginModal) loginModal.classList.remove('hidden');
+    return;
+    }
+    isFavorited = !isFavorited;
+    const icon = favBtn.querySelector('i');
+    if (isFavorited) {
+    icon.classList.remove('ri-heart-line');
+    icon.classList.add('ri-heart-fill');
+    favBtn.classList.add('text-primary');
+    if (toast) {
+    toast.classList.remove('translate-x-full');
+    setTimeout(() => toast.classList.add('translate-x-full'), 2000);
+    }
+    } else {
+    icon.classList.remove('ri-heart-fill');
+    icon.classList.add('ri-heart-line');
+    favBtn.classList.remove('text-primary');
+    }
+    });
+    }
+    // Close login modal when clicking outside
+    if (loginModal) {
+    loginModal.addEventListener('click', function (e) {
+    if (e.target === loginModal) loginModal.classList.add('hidden');
+    });
+    document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') loginModal.classList.add('hidden');
+    });
+    }
+    // View favorites button
+    const viewFavoritesBtn = card.querySelector('.viewFavoritesBtn');
+    if (viewFavoritesBtn && toast) {
+    viewFavoritesBtn.addEventListener('click', function () {
+    // Add navigation to favorites page
+    console.log('Navigate to favorites page');
+    toast.classList.add('translate-x-full');
+    });
+    }
+    });
+    });
+    
+    // Auth-based UI logic for nav and hero search
+    document.addEventListener('DOMContentLoaded', function () {
+    const token = localStorage.getItem('token');
+    const username = localStorage.getItem('username');
+    const loginBtn = document.getElementById('loginNavBtn');
+    const registerBtn = document.getElementById('registerNavBtn');
+    const listPetBtn = document.getElementById('listPetNavBtn');
+    const navUsername = document.getElementById('navUsername');
+    const logoutBtn = document.getElementById('logoutBtn');
+    // Hide login/register if logged in, else show/hide list pet
+    if (token) {
+        if (loginBtn) loginBtn.style.display = 'none';
+        if (registerBtn) registerBtn.style.display = 'none';
+        if (navUsername && username) {
+            navUsername.textContent = username;
+            navUsername.classList.remove('hidden');
+        }
+        if (logoutBtn) logoutBtn.classList.remove('hidden');
+        if (listPetBtn) listPetBtn.style.display = '';
+    } else {
+        if (listPetBtn) {
+            listPetBtn.style.display = '';
+            listPetBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                showLoginRequiredPopup();
+            });
+        }
+        if (navUsername) navUsername.classList.add('hidden');
+        if (logoutBtn) logoutBtn.classList.add('hidden');
+        // Disable search in hero section
+        const searchButton = document.querySelector('.bg-primary.text-white.px-6.py-2');
+        if (searchButton) {
+            searchButton.disabled = true;
+            searchButton.classList.add('opacity-50', 'cursor-not-allowed');
+            searchButton.title = 'Login to use search';
+        }
+    }
+    // Logout button logic
+    if (logoutBtn) {
+    logoutBtn.addEventListener('click', function () {
+    localStorage.removeItem('token');
+    localStorage.removeItem('username');
+    window.location.reload();
+    });
+    }
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+    // Custom switch functionality
+    const switches = document.querySelectorAll('.custom-switch input');
+    switches.forEach(switchInput => {
+    switchInput.addEventListener('change', function () {
+    // Switch state is handled by CSS
+    });
+    });
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+    // Mobile menu toggle
+    const menuButton = document.querySelector('button[aria-label="Menu"]');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    if (menuButton && mobileMenu) {
+    menuButton.addEventListener('click', function () {
+    mobileMenu.classList.toggle('hidden');
+    });
+    }
+    // Chat modal functionality
+    const startChatBtn = document.getElementById('startChatBtn');
+    const chatModal = document.getElementById('chatModal');
+    const closeChatModal = document.getElementById('closeChatModal');
+    const shelterSearch = document.getElementById('shelterSearch');
+    const shelterList = document.getElementById('shelterList');
+    if (startChatBtn && chatModal) {
+    startChatBtn.addEventListener('click', function () {
+    chatModal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+    });
+    }
+    if (closeChatModal && chatModal) {
+    closeChatModal.addEventListener('click', function () {
+    chatModal.classList.add('hidden');
+    document.body.style.overflow = '';
+    });
+    // Close modal when clicking outside
+    chatModal.addEventListener('click', function (e) {
+    if (e.target === chatModal) {
+    chatModal.classList.add('hidden');
+    document.body.style.overflow = '';
+    }
+    });
+    }
+    if (shelterSearch) {
+    shelterSearch.addEventListener('input', function (e) {
+    const searchTerm = e.target.value.toLowerCase();
+    const shelters = shelterList.querySelectorAll('.bg-gray-50');
+    shelters.forEach(shelter => {
+    const shelterName = shelter.querySelector('h4').textContent.toLowerCase();
+    const shelterDesc = shelter.querySelector('p').textContent.toLowerCase();
+    if (shelterName.includes(searchTerm) || shelterDesc.includes(searchTerm)) {
+    shelter.style.display = '';
+    } else {
+    shelter.style.display = 'none';
+    }
+    });
+    });
+    }
+    // Chat Now button functionality
+    const chatNowButtons = document.querySelectorAll('#shelterList button');
+    chatNowButtons.forEach(button => {
+    button.addEventListener('click', function () {
+    const shelterName = this.closest('.bg-gray-50').querySelector('h4').textContent;
+    chatModal.classList.add('hidden');
+    document.body.style.overflow = '';
+    // Here you can add logic to open the chat interface with the selected shelter
+    });
+    });
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+    // Find the search button in the hero section
+    const searchButton = document.querySelector('.bg-primary.text-white.px-6.py-2');
+    // Find the location input and pet type select
+    const locationInput = document.querySelector('input[placeholder="Enter your location"]');
+    const petTypeSelect = document.querySelector('select');
+
+    if (searchButton && locationInput && petTypeSelect) {
+    searchButton.addEventListener('click', function (e) {
+    e.preventDefault();
+    const location = encodeURIComponent(locationInput.value.trim());
+    const petType = encodeURIComponent(petTypeSelect.value);
+    // Build query string
+    let query = [];
+    if (location) query.push(`location=${location}`);
+    if (petType) query.push(`type=${petType}`);
+    const queryString = query.length ? `?${query.join('&')}` : '';
+    window.location.href = `search.html${queryString}`;
+    });
+    }
+    });
     </script>
 </body>
 

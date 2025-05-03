@@ -66,6 +66,22 @@
         <div id="listingError" class="hidden text-red-600 text-center mt-4"></div>
     </div>
     <script>
+    // Auth-based UI logic for listing page
+    document.addEventListener('DOMContentLoaded', function () {
+        const token = localStorage.getItem('token');
+        const loginBtn = document.getElementById('loginNavBtn');
+        const registerBtn = document.getElementById('registerNavBtn');
+        const listingContainer = document.getElementById('listingContainer');
+        if (!token) {
+            // Hide the form and show a message
+            if (listingContainer) {
+                listingContainer.innerHTML = '<div class="text-center text-red-600 font-semibold">You must be logged in to list a pet.</div>';
+            }
+        } else {
+            if (loginBtn) loginBtn.style.display = 'none';
+            if (registerBtn) registerBtn.style.display = 'none';
+        }
+    });
     document.getElementById('petListingForm').addEventListener('submit', async function(e) {
         e.preventDefault();
         const formData = new FormData();
