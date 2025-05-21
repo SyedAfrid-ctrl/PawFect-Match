@@ -53,7 +53,25 @@
         <p class="mb-1"><strong>Gender:</strong> ${pet.gender}</p>
         <p class="mb-1"><strong>Location:</strong> ${pet.location || 'N/A'}</p>
         <p class="mb-3"><strong>Description:</strong> ${pet.description || 'No description.'}</p>
+        <button class="flex items-center text-primary mt-2 chat-btn" id="chatOwnerBtn" data-owner="${pet.owner && pet.owner._id ? pet.owner._id : ''}" data-ownername="${pet.owner && pet.owner.username ? pet.owner.username : ''}">
+          <i class="ri-chat-3-line mr-1"></i> Chat with Owner
+        </button>
       `;
+    // Add chat button event listener
+    setTimeout(() => {
+      const chatBtn = document.getElementById('chatOwnerBtn');
+      if (chatBtn) {
+        chatBtn.addEventListener('click', function() {
+          const ownerId = this.getAttribute('data-owner');
+          const ownerName = this.getAttribute('data-ownername');
+          if (ownerId) {
+            window.location.href = `chat.html?user=${ownerId}&username=${encodeURIComponent(ownerName)}`;
+          } else {
+            alert('Owner information not available for this pet.');
+          }
+        });
+      }
+    }, 0);
     }
 
     document.getElementById('adoptBtn').addEventListener('click', async function() {

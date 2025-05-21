@@ -92,9 +92,13 @@
         formData.append('description', document.getElementById('petDescription').value);
         formData.append('location', document.getElementById('petLocation').value);
         formData.append('image', document.getElementById('petImage').files[0]);
+        const token = localStorage.getItem('token');
         try {
             const res = await fetch('http://localhost:5000/api/pets', {
                 method: 'POST',
+                headers: {
+                  'Authorization': `Bearer ${token}`
+                },
                 body: formData
             });
             if (res.ok) {

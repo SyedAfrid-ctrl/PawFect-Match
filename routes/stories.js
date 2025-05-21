@@ -30,14 +30,10 @@ router.get('/', async (req, res) => {
 router.post('/', upload.single('image'), async (req, res) => {
   try {
     console.log('BODY:', req.body);
-    console.log('FILE:', req.file);
-    // Reconstruct user object from form fields
-    const user = {
-      name: req.body['user[name]'],
-      avatar: req.body['user[avatar]'],
-      adopted: req.body['user[adopted]']
-    };
-    if (!user.name) {
+console.log('BODY KEYS:', Object.keys(req.body));
+    // Use user object directly (Multer/Express nested parsing), but deep clone to plain object
+    const user = JSON.parse(JSON.stringify(req.body.user));
+    if (!user || !user.name) {
       return res.status(400).json({ error: 'Missing user name' });
     }
     const description = req.body.description;

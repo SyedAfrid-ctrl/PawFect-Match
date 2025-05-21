@@ -18,12 +18,28 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 // Add Pet
-router.post('/', upload.single('image'), async (req, res) => {
+// Require authentication middleware for owner info
+const jwt = require('jsonwebtoken');
+const User = require('../models/User');
+
+function authenticateToken(req, res, next) {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+  if (!token) return res.status(401).json({ error: 'No token provided' });
+  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+    if (err) return res.status(403).json({ error: 'Invalid token' });
+    req.user = user;
+    next();
+  });
+}
+
+router.post('/', authenticateToken, upload.single('image'), async (req, res) => {
   const { name, type, age, gender, description, location } = req.body;
   const image = req.file ? `/uploads/${req.file.filename}` : null;
 
   try {
-    const pet = new Pet({ name, type, age, gender, description, location, image });
+    const owner = req.user.id;
+    const pet = new Pet({ name, type, age, gender, description, location, image, owner });
     await pet.save();
     res.status(201).json({ message: 'Pet added successfully', pet });
   } catch (err) {
@@ -39,7 +55,7 @@ router.get('/', async (req, res) => {
     if (type) filter.type = new RegExp(type, 'i');
     if (age) filter.age = new RegExp(age, 'i');
     if (location) filter.location = new RegExp(location, 'i');
-    const pets = await Pet.find(filter);
+    const pets = await Pet.find(filter).populate('owner', 'username email');
     res.json(pets);
   } catch (err) {
     res.status(500).json({ error: 'Error fetching pets' });
@@ -49,7 +65,7 @@ router.get('/', async (req, res) => {
 // Get single pet by ID
 router.get('/:id', async (req, res) => {
   try {
-    const pet = await Pet.findById(req.params.id);
+    const pet = await Pet.findById(req.params.id).populate('owner', 'username email');
     if (!pet) return res.status(404).json({ error: 'Pet not found' });
     res.json(pet);
   } catch (err) {

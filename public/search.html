@@ -46,9 +46,112 @@
           <p class="text-sm text-gray-600">${pet.type}, Age: ${pet.age}</p>
           <p class="text-sm text-gray-600">${pet.location}</p>
           <a href="pet-profile.html?id=${pet._id}" class="text-indigo-600 mt-2 inline-block">View Profile</a>
+          <button class="flex items-center text-primary mt-2 chat-btn" data-owner="${pet.owner && pet.owner._id ? pet.owner._id : ''}" data-ownername="${pet.owner && pet.owner.username ? pet.owner.username : ''}">
+            <i class="ri-chat-3-line mr-1"></i> Chat with Owner
+          </button>
+          <div class="chat-modal fixed inset-0 bg-black bg-opacity-40 z-50 hidden items-center justify-center">
+            <div class="bg-white rounded-lg shadow-lg w-full max-w-md mx-auto p-4 flex flex-col">
+              <div class="flex items-center mb-4">
+                <span class="font-semibold text-lg text-primary chat-modal-username"></span>
+                <button class="ml-auto text-gray-500 close-chat-modal"><i class="ri-close-line text-2xl"></i></button>
+              </div>
+              <div class="flex-1 overflow-y-auto mb-4 chat-modal-messages" style="min-height:200px;"></div>
+              <form class="flex items-center chat-modal-form">
+                <input type="text" class="flex-1 border rounded-full px-3 py-2 mr-2 chat-modal-input" placeholder="Type a message..." autocomplete="off" />
+                <button type="submit" class="bg-primary text-white px-4 py-2 rounded-full"><i class="ri-send-plane-fill"></i></button>
+              </form>
+            </div>
+          </div>
         `;
         container.appendChild(card);
       });
+
+      // // Add chat button event listeners
+      // document.querySelectorAll('.chat-btn').forEach(btn => {
+      //   btn.addEventListener('click', function(e) {
+      //     e.preventDefault();
+      //     const ownerId = this.getAttribute('data-owner');
+      //     const ownerName = this.getAttribute('data-ownername');
+      //     if (!ownerId) {
+      //       alert('Owner information not available for this pet.');
+      //       return;
+      //     }
+      //     // Find or create the modal for this card
+      //     let card = this.closest('.bg-white');
+      //     let modal = card.querySelector('.chat-modal');
+      //     if (!modal) return;
+      //     modal.classList.remove('hidden');
+      //     modal.classList.add('flex');
+      //     modal.querySelector('.chat-modal-username').textContent = ownerName;
+      //     // Load messages
+      //     const messagesDiv = modal.querySelector('.chat-modal-messages');
+      //     messagesDiv.innerHTML = '<div class="text-gray-400 text-center py-4">Loading...</div>';
+      //     fetch(`/api/chat/history/${ownerId}`, { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('token') } })
+      //       .then(res => res.json())
+      //       .then(messages => {
+      //         messagesDiv.innerHTML = '';
+      //         messages.forEach(msg => {
+      //           const div = document.createElement('div');
+      //           div.className = 'mb-2 flex ' + (msg.sender === getUserId() ? 'justify-end' : 'justify-start');
+      //           div.innerHTML = `<div class='${msg.sender === getUserId() ? 'bg-primary text-white' : 'bg-gray-100'} rounded-lg px-4 py-2 max-w-xs'>${escapeHtml(msg.content)}</div>`;
+      //           messagesDiv.appendChild(div);
+      //         });
+      //         messagesDiv.scrollTop = messagesDiv.scrollHeight;
+      //       });
+      //     // Setup send
+      //     const form = modal.querySelector('.chat-modal-form');
+      //     const input = modal.querySelector('.chat-modal-input');
+      //     form.onsubmit = function(ev) {
+      //       ev.preventDefault();
+      //       if (!input.value.trim()) return;
+      //       fetch('/api/chat/send', {
+      //         method: 'POST',
+      //         headers: {
+      //           'Content-Type': 'application/json',
+      //           'Authorization': 'Bearer ' + localStorage.getItem('token')
+      //         },
+      //         body: JSON.stringify({ receiver: ownerId, content: input.value.trim() })
+      //       })
+      //       .then(res => res.json())
+      //       .then(msg => {
+      //         const div = document.createElement('div');
+      //         div.className = 'mb-2 flex justify-end';
+      //         div.innerHTML = `<div class='bg-primary text-white rounded-lg px-4 py-2 max-w-xs'>${escapeHtml(msg.content)}</div>`;
+      //         messagesDiv.appendChild(div);
+      //         messagesDiv.scrollTop = messagesDiv.scrollHeight;
+      //         input.value = '';
+      //       });
+      //     };
+      //     // Close modal
+      //     modal.querySelector('.close-chat-modal').onclick = function() {
+      //       modal.classList.add('hidden');
+      //       modal.classList.remove('flex');
+      //     };
+      //   });
+      // });
+
+      // Helper functions
+      function getUserId() {
+        let id = localStorage.getItem('userId');
+        if (id) return id;
+        const req = new XMLHttpRequest();
+        req.open('GET', '/api/auth/me', false);
+        req.setRequestHeader('Authorization', 'Bearer ' + localStorage.getItem('token'));
+        req.send(null);
+        if (req.status === 200) {
+          const user = JSON.parse(req.responseText);
+          if (user && user._id) {
+            localStorage.setItem('userId', user._id);
+            return user._id;
+          }
+        }
+        return null;
+      }
+      function escapeHtml(text) {
+        return text.replace(/[&<>\"]/g, function(c) {
+          return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];
+        });
+      }
     }
 
     document.getElementById('searchBtn').addEventListener('click', () => {

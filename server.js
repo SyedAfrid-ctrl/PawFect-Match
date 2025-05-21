@@ -1,8 +1,3 @@
-// Log incoming requests for debugging
-app.use((req, res, next) => {
-  console.log(req.method, req.url, req.headers['content-type'], req.headers['content-length']);
-  next();
-});
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
@@ -11,9 +6,18 @@ const petRoutes = require('./routes/pets');
 const adoptionsRoutes = require('./routes/adoptions');
 const storiesRoutes = require('./routes/stories');
 const cors = require('cors');
+const http = require('http');
+const { Server } = require('socket.io');
 
 const app = express();
-const PORT = process.env.PORT || 5000
+const server = http.createServer(app);
+const PORT = process.env.PORT || 5000;
+
+// Log incoming requests for debugging
+app.use((req, res, next) => {
+  console.log(req.method, req.url, req.headers['content-type'], req.headers['content-length']);
+  next();
+});
 
 // Middleware
 app.use(cors({
@@ -24,17 +28,20 @@ app.use(cors({
     'http://localhost:5501'
   ],
   methods: ['GET', 'POST'],
-  allowedHeaders: ['Content-Type'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
 }));
-app.use(express.json({ limit: '100mb' }));
-app.use(express.urlencoded({ limit: '100mb', extended: true }));
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 }).then(() => console.log('MongoDB connected')).catch(err => console.error(err));
+
+
+// Body parsers must come BEFORE routes that need req.body
+app.use(express.json({ limit: '100mb' }));
+app.use(express.urlencoded({ limit: '100mb', extended: true }));
 
 // Routes
 app.use('/api/auth', authRoutes);
@@ -61,5 +68,5 @@ app.get('/api/pets', async (req, res) => {
   }
 });
 
-// Start Server
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// Start Server (use http server for Socket.IO)
+server.listen(PORT, () => console.log(`Server running on port ${PORT}`));

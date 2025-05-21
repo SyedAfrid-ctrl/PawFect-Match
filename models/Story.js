@@ -6,12 +6,14 @@ const commentSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now }
 });
 
+const userSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  avatar: { type: String },
+  adopted: { type: String }
+}, { _id: false });
+
 const storySchema = new mongoose.Schema({
-  user: {
-    name: { type: String, required: true },
-    avatar: { type: String },
-    adopted: { type: String }
-  },
+  user: { type: userSchema, required: true },
   description: { type: String, required: true },
   image: { type: String }, // URL or path
   likes: { type: Number, default: 0 },
