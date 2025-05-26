@@ -55,9 +55,15 @@ router.get('/', async (req, res) => {
     if (type) filter.type = new RegExp(type, 'i');
     if (age) filter.age = new RegExp(age, 'i');
     if (location) filter.location = new RegExp(location, 'i');
+
+    console.log('Filter:', filter); // Debugging log
+
     const pets = await Pet.find(filter).populate('owner', 'username email');
+    console.log('Pets found:', pets.length); // Debugging log
+
     res.json(pets);
   } catch (err) {
+    console.error('Error fetching pets:', err); // Debugging log
     res.status(500).json({ error: 'Error fetching pets' });
   }
 });
