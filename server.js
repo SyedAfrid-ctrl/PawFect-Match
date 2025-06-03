@@ -9,6 +9,8 @@ const chatRoutes = require('./routes/chat');
 const cors = require('cors');
 const http = require('http');
 const { Server } = require('socket.io');
+const nodemailer = require('nodemailer');
+const AdoptionRequest = require('./models/AdoptionRequest');
 
 const app = express();
 const server = http.createServer(app);
@@ -41,7 +43,7 @@ mongoose.connect(process.env.MONGO_URI, {
 
 
 // Body parsers must come BEFORE routes that need req.body
-app.use(express.json({ limit: '100mb' }));
+app.use(express.json());
 app.use(express.urlencoded({ limit: '100mb', extended: true }));
 
 // Routes
@@ -50,6 +52,7 @@ app.use('/api/pets', petRoutes);
 app.use('/api/adoptions', adoptionsRoutes);
 app.use('/api/stories', storiesRoutes);
 app.use('/api/chat', chatRoutes);
+app.use('/api/adoption-request', (req, res, next) => next()); // Ensure adoption request route is mounted
 
 // Static file serving should come after API routes
 app.use(express.static('public'));
@@ -67,6 +70,51 @@ app.get('/api/pets', async (req, res) => {
     res.json(pets);
   } catch (err) {
     res.status(500).json({ error: 'Error fetching pets' });
+  }
+});
+
+// Route to handle adoption requests
+app.post('/api/adoption-request', async (req, res) => {
+  try {
+    console.log('Request body:', req.body); // Log request body
+
+    const { user_id, pet_id, user_email, pet_name, owner_id, owner_username, logged_in_username } = req.body;
+
+    // Create a new adoption request
+    const newRequest = new AdoptionRequest({ user_id, pet_id, owner_id, owner_username });
+    await newRequest.save();
+
+    // Send notification email
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+      }
+    });
+
+    const mailOptions = {
+      from: `PawFect Match <${process.env.EMAIL_USER}>`,
+      to: user_email,
+      subject: `Adoption Request for ${pet_name}`,
+      text: `Hi ${owner_username},
+
+${logged_in_username} (${user_email}) wants to adopt ${pet_name} on PawFect Match.
+
+Join the adoption process.
+
+On behalf of PawFect Match,
+The PawFect Match team.`
+    };
+
+    console.log('Email options:', mailOptions); // Log email options
+
+    await transporter.sendMail(mailOptions);
+
+    res.status(201).json({ message: 'Adoption request submitted successfully and email notification sent.' });
+  } catch (error) {
+    console.error('Error handling adoption request:', error);
+    res.status(500).json({ error: 'Failed to submit adoption request.' });
   }
 });
 

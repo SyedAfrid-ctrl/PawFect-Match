@@ -91,9 +91,9 @@
                     class="flex items-center justify-center text-primary text-3xl font-bold hover:text-primary/80 transition-colors"
                     data-readdy="true" class="inline-flex items-center">
                     <div class="w-10 h-10 flex items-center justify-center text-primary text-2xl">
-                        <i class="ri-footprint-line"></i>
+                        🐾
                     </div>
-                    <span class="ml-2 text-2xl text-gray-800 logo">PawfectMatch</span>
+                    <span class="ml-2 text-2xl text-gray-800 logo" style="font-family: 'Pacifico', serif;">PawfectMatch</span>
                 </a>
             </div>
             <div class="bg-white shadow-md rounded-lg p-8">
@@ -259,6 +259,10 @@
                         } else {
                             // fallback: try to use the login field
                             localStorage.setItem('username', emailOrUsername);
+                        }
+                        // Store userId in localStorage
+                        if (data.user && data.user._id) {
+                            localStorage.setItem('userId', data.user._id);
                         }
                         window.location.href = 'index.html'; // redirect after login
                     } else {
