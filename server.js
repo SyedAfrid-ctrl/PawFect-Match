@@ -6,6 +6,7 @@ const petRoutes = require('./routes/pets');
 const adoptionsRoutes = require('./routes/adoptions');
 const storiesRoutes = require('./routes/stories');
 const chatRoutes = require('./routes/chat');
+const shelterRoutes = require('./routes/shelters');
 const cors = require('cors');
 const http = require('http');
 const { Server } = require('socket.io');
@@ -53,6 +54,7 @@ app.use('/api/adoptions', adoptionsRoutes);
 app.use('/api/stories', storiesRoutes);
 app.use('/api/chat', chatRoutes);
 app.use('/api/adoption-request', (req, res, next) => next()); // Ensure adoption request route is mounted
+app.use('/api/shelters', shelterRoutes);
 
 // Static file serving should come after API routes
 app.use(express.static('public'));
@@ -86,7 +88,9 @@ app.post('/api/adoption-request', async (req, res) => {
 
     // Send notification email
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
+      host: 'smtp.gmail.com',
+      port: 587,
+      secure: false, // true for 465, false for other ports
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
@@ -99,12 +103,10 @@ app.post('/api/adoption-request', async (req, res) => {
       subject: `Adoption Request for ${pet_name}`,
       text: `Hi ${owner_username},
 
-${logged_in_username} (${user_email}) wants to adopt ${pet_name} on PawFect Match.
+You have received an adoption request for ${pet_name} from ${logged_in_username}. Please log in to your account to review the request.
 
-Join the adoption process.
-
-On behalf of PawFect Match,
-The PawFect Match team.`
+Best regards,
+PawFect Match Team`
     };
 
     console.log('Email options:', mailOptions); // Log email options

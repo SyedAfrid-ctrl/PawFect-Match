@@ -93,44 +93,67 @@
         const API_BASE = 'http://localhost:5000'; // backend port
 
         const urlParams = new URLSearchParams(window.location.search);
-        const ownerId = urlParams.get('ownerId');
-        const username = urlParams.get('username');
+        let ownerId = urlParams.get('ownerId');
+        let ownerName = urlParams.get('ownerName');
 
         const userId = localStorage.getItem('userId');
+        const username = localStorage.getItem('username');
         const token = localStorage.getItem('token');
 
-        if (!ownerId || !username || !token) {
-            alert('Missing required information. Please log in and ensure the URL contains ownerId and username.');
-            window.location.href = '/login.html';
+        if (!ownerId || !ownerName) {
+            ownerId = localStorage.getItem('ownerId');
+            ownerName = localStorage.getItem('ownerName');
+        } else {
+            localStorage.setItem('ownerId', ownerId);
+            localStorage.setItem('ownerName', ownerName);
         }
 
-        // Update UI with owner and chat details
-        document.getElementById('currentUser').textContent = username + ` (${ownerId})`;
-        document.getElementById('chatWith').textContent = 'Me';
+        const currentUserElement = document.getElementById('currentUser');
+        const chatWithElement = document.getElementById('chatWith');
+
+        if (!currentUserElement || !chatWithElement) {
+            console.error('Missing elements: currentUser or chatWith');
+        } else {
+            currentUserElement.textContent = username;
+            chatWithElement.textContent = ownerName + ` (${ownerId})`;
+        }
 
         function loadMessages() {
+            if (!ownerId) {
+                console.error('Invalid ownerId. Cannot fetch messages.');
+                return;
+            }
+
             fetch(`${API_BASE}/api/chat/${ownerId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             })
-                .then(response => response.json())
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch messages');
+                    }
+                    return response.json();
+                })
                 .then(messages => {
                     chatMessages.innerHTML = '';
                     messages.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
                     messages.forEach(msg => {
                         const div = document.createElement('div');
                         div.className = 'message ' + (msg.sender === userId ? 'me' : 'them');
-                        div.innerHTML = `<strong>${msg.sender === userId ? 'Me' : username}:</strong> ${msg.content}`;
+                        div.innerHTML = `<strong>${msg.sender === userId ? 'Me' : ownerName}:</strong> ${msg.content}`;
                         chatMessages.appendChild(div);
                     });
                     chatMessages.scrollTop = chatMessages.scrollHeight;
                 })
-                .catch(error => console.error('Error loading messages:', error));
+                .catch(error => {
+                    console.error('Error loading messages:', error);
+                });
         }
 
         messageForm.addEventListener('submit', (e) => {
             e.preventDefault();
+
             const content = messageInput.value.trim();
             if (!content) return;
 
@@ -157,7 +180,7 @@
                         chatMessages.appendChild(div);
                         chatMessages.scrollTop = chatMessages.scrollHeight;
                     } else {
-                        alert('Message failed to send.');
+                        console.error('Message failed to send.');
                     }
                 })
                 .catch(error => console.error('Error sending message:', error));

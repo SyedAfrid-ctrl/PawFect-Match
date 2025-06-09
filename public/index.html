@@ -31,18 +31,16 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
-                    <a href="#" class="flex items-center">
+                    <a href="index.html" class="flex items-center">
                         <div class="w-10 h-10 flex items-center justify-center text-primary text-2xl">
                             🐾
                         </div>
                         <span class="ml-2 text-2xl text-gray-800 logo">PawfectMatch</span>
                     </a>
                     <div class="hidden md:ml-10 md:flex md:space-x-8 items-center">
-                        <a href="#" class="text-primary border-b-2 border-primary px-1 pt-1 font-medium">Home</a>
-                        <a href="search.html" class="text-gray-700 hover:text-primary px-1 pt-1 font-medium"
-                            id="searchNavLink">Search Pets</a>
-                        <a href="stories.html" class="text-gray-700 hover:text-primary px-1 pt-1 font-medium"
-                            id="storiesNavLink">Pawfect Stories</a>
+                        <a href="search.html" class="text-gray-700 hover:text-primary px-1 pt-1 font-medium">Search Pets</a>
+                        <a href="stories.html" class="text-gray-700 hover:text-primary px-1 pt-1 font-medium">Pawfect Stories</a>
+                        <a href="registered-shelters.html" class="text-gray-700 hover:text-primary px-1 pt-1 font-medium">Shelters</a>
                     </div>
                 </div>
                 <div class="flex items-center">
@@ -778,7 +776,8 @@
                         Chatting</button>
                     <!-- Chat Modal -->
                     <!-- WhatsApp-style Chat Modal (dynamic) -->
-                    <div id="chatModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
+                    <div id="chatModal"
+                        class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
                         <div class="bg-white rounded-lg w-full max-w-3xl mx-4 flex shadow-lg overflow-hidden">
                             <!-- User List -->
                             <div class="w-1/3 border-r border-gray-200 bg-gray-50 flex flex-col">
@@ -789,7 +788,8 @@
                                     </button>
                                 </div>
                                 <div class="p-2">
-                                    <input id="chatUserSearch" type="text" placeholder="Search users..." class="w-full border-none bg-gray-100 rounded-lg py-2 px-4 text-sm focus:ring-2 focus:ring-primary/20 focus:outline-none" />
+                                    <input id="chatUserSearch" type="text" placeholder="Search users..."
+                                        class="w-full border-none bg-gray-100 rounded-lg py-2 px-4 text-sm focus:ring-2 focus:ring-primary/20 focus:outline-none" />
                                 </div>
                                 <div id="chatUserList" class="flex-1 overflow-y-auto">
                                     <!-- User list will be rendered here -->
@@ -798,7 +798,8 @@
                             <!-- Chat Window -->
                             <div class="flex-1 flex flex-col">
                                 <div class="p-4 border-b border-gray-100 flex items-center">
-                                    <img id="currentUserProfilePic" src="" alt="Me" class="w-10 h-10 rounded-full object-cover mr-3 hidden" />
+                                    <img id="currentUserProfilePic" src="" alt="Me"
+                                        class="w-10 h-10 rounded-full object-cover mr-3 hidden" />
                                     <span id="currentUsername" class="font-semibold text-primary"></span>
                                     <span class="ml-2 text-xs text-gray-500">(You)</span>
                                 </div>
@@ -806,15 +807,19 @@
                                     <!-- Messages will be rendered here -->
                                 </div>
                                 <div class="p-3 border-t border-gray-100">
-                                  <form id="chatInputForm" class="flex items-center">
-                                    <button type="button" disabled class="w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full text-gray-400 cursor-not-allowed">
-                                      <i class="ri-image-line"></i>
-                                    </button>
-                                    <input id="chatInput" type="text" placeholder="Type a message..." autocomplete="off" class="flex-1 border-none bg-gray-100 rounded-full py-2 px-4 text-sm mx-2 focus:ring-2 focus:ring-primary/20 focus:outline-none" />
-                                    <button type="submit" class="w-8 h-8 flex items-center justify-center bg-primary rounded-full text-white">
-                                      <i class="ri-send-plane-fill"></i>
-                                    </button>
-                                  </form>
+                                    <form id="chatInputForm" class="flex items-center">
+                                        <button type="button" disabled
+                                            class="w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full text-gray-400 cursor-not-allowed">
+                                            <i class="ri-image-line"></i>
+                                        </button>
+                                        <input id="chatInput" type="text" placeholder="Type a message..."
+                                            autocomplete="off"
+                                            class="flex-1 border-none bg-gray-100 rounded-full py-2 px-4 text-sm mx-2 focus:ring-2 focus:ring-primary/20 focus:outline-none" />
+                                        <button type="submit"
+                                            class="w-8 h-8 flex items-center justify-center bg-primary rounded-full text-white">
+                                            <i class="ri-send-plane-fill"></i>
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -928,6 +933,9 @@
             </div>
         </div>
     </section>
+            </div>
+        </div>
+    </section>
     <!-- Footer -->
     <footer class="bg-gray-900 text-white pt-16 pb-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -937,9 +945,6 @@
                         <div class="w-10 h-10 flex items-center justify-center text-white text-2xl">
                             🐾
                         </div>
-                        <span class="ml-2 text-2xl text-white logo">PawfectMatch</span>
-                    </a>
-                    <p class="text-gray-400 mb-6">Connecting loving homes with pets in need. Our mission is to make pet
                         adoption simple, trustworthy, and joyful for everyone involved.</p>
                     <div class="flex space-x-4">
                         <a href="#"
@@ -950,7 +955,8 @@
                             class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full text-gray-400 hover:text-white hover:bg-primary transition-colors">
                             <i class="ri-twitter-x-fill"></i>
                         </a>
-                        <a href="#"
+                                               <a href="#"
+
                             class="w-10 h-10 flex items-center justify-center bg-gray-800 rounded-full text-gray-400 hover:text-white hover:bg-primary transition-colors">
                             <i class="ri-instagram-fill"></i>
                         </a>
@@ -974,7 +980,7 @@
                 <div>
                     <h3 class="text-lg font-semibold mb-6">For Shelters</h3>
                     <ul class="space-y-3">
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Register
+                        <li><a href="shelter-register.html" class="text-gray-400 hover:text-white transition-colors">Register
                                 Organization</a></li>
                         <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Partner Benefits</a>
                         </li>
@@ -1020,391 +1026,393 @@
     </footer>
     <!-- Chat Button -->
     <div class="fixed bottom-6 right-6 z-50">
-        <a href="chat.html" id="floatingChatBtn" class="w-14 h-14 bg-primary rounded-full shadow-lg flex items-center justify-center text-white text-2xl hover:bg-primary/90 relative">
+        <a href="chat.html" id="floatingChatBtn"
+            class="w-14 h-14 bg-primary rounded-full shadow-lg flex items-center justify-center text-white text-2xl hover:bg-primary/90 relative">
             <i class="ri-chat-3-fill"></i>
-            <span id="chatNotificationBadge" class="hidden absolute -top-1 -right-2 bg-red-500 text-white text-xs rounded-full px-1.5 py-0.5">0</span>
+            <span id="chatNotificationBadge"
+                class="hidden absolute -top-1 -right-2 bg-red-500 text-white text-xs rounded-full px-1.5 py-0.5">0</span>
         </a>
     </div>
     <!-- Consolidated Custom JS -->
     <script>
-    // --- Chat Notification Badge & Chat Modal Integration ---
-    function updateChatBadge() {
-        const badge = document.getElementById('chatNotificationBadge');
-        const token = localStorage.getItem('token');
-        if (!badge) return;
-        if (!token) {
-            badge.classList.add('hidden');
-            return;
-        }
-        fetch('/api/chat/unread-count', {
-            headers: { 'Authorization': 'Bearer ' + token }
-        })
-        .then(res => res.json())
-        .then(data => {
-            if (data && typeof data.total === 'number' && data.total > 0) {
-                badge.textContent = data.total;
-                badge.classList.remove('hidden');
-            } else {
-                badge.classList.add('hidden');
-            }
-        })
-        .catch(() => {
-            badge.classList.add('hidden');
-        });
-    }
-    document.addEventListener('DOMContentLoaded', updateChatBadge);
-    window.addEventListener('storage', function(e) {
-        if (e.key === 'chat-unread-sync') updateChatBadge();
-    });
-
-    // --- Chat Modal Logic ---
-    document.addEventListener('DOMContentLoaded', function () {
-        const chatBtn = document.getElementById('floatingChatBtn');
-        const chatModal = document.getElementById('chatModal');
-        const closeChatModal = document.getElementById('closeChatModal');
-        // Show current user info in chat modal
-        function showCurrentUserInChatModal() {
-            const username = localStorage.getItem('username');
-            const profilePic = localStorage.getItem('profilePic');
-            const usernameSpan = document.getElementById('currentUsername');
-            const profileImg = document.getElementById('currentUserProfilePic');
-            if (usernameSpan) usernameSpan.textContent = username || '';
-            if (profileImg) {
-                if (profilePic) {
-                    profileImg.src = profilePic;
-                    profileImg.classList.remove('hidden');
-                } else {
-                    // fallback to avatar
-                    profileImg.src = 'https://ui-avatars.com/api/?name=' + encodeURIComponent(username || 'User');
-                    profileImg.classList.remove('hidden');
-                }
-            }
-        }
-        if (chatBtn && chatModal) {
-            chatBtn.addEventListener('click', function () {
-                const token = localStorage.getItem('token');
-                if (!token) {
-                    showLoginRequiredPopup();
-                    return;
-                }
-                showCurrentUserInChatModal();
-                chatModal.classList.remove('hidden');
-                document.body.style.overflow = 'hidden';
-            });
-        }
-        if (closeChatModal && chatModal) {
-            closeChatModal.addEventListener('click', function () {
-                chatModal.classList.add('hidden');
-                document.body.style.overflow = '';
-            });
-            chatModal.addEventListener('click', function (e) {
-                if (e.target === chatModal) {
-                    chatModal.classList.add('hidden');
-                    document.body.style.overflow = '';
-                }
-            });
-        }
-    });
-
-    // --- Login Required Popup & Feature Gating ---
-    function showLoginRequiredPopup() {
-        const popup = document.getElementById('loginRequiredPopup');
-        if (popup) popup.classList.remove('hidden');
-    }
-    document.addEventListener('DOMContentLoaded', function () {
-        // Block "List a Pet" for logged-out users
-        const listPetBtn = document.getElementById('listPetNavBtn');
-        function enforceListPetAuth() {
+        // --- Chat Notification Badge & Chat Modal Integration ---
+        function updateChatBadge() {
+            const badge = document.getElementById('chatNotificationBadge');
             const token = localStorage.getItem('token');
-            if (listPetBtn) {
-                if (!token) {
-                    listPetBtn.addEventListener('click', listPetHandler);
-                    listPetBtn.setAttribute('href', '#');
-                    listPetBtn.classList.add('cursor-not-allowed');
-                } else {
-                    listPetBtn.removeEventListener('click', listPetHandler);
-                    listPetBtn.classList.remove('cursor-not-allowed');
+            if (!badge) return;
+            if (!token) {
+                badge.classList.add('hidden');
+                return;
+            }
+            fetch('/api/chat/unread-count', {
+                headers: { 'Authorization': 'Bearer ' + token }
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data && typeof data.total === 'number' && data.total > 0) {
+                        badge.textContent = data.total;
+                        badge.classList.remove('hidden');
+                    } else {
+                        badge.classList.add('hidden');
+                    }
+                })
+                .catch(() => {
+                    badge.classList.add('hidden');
+                });
+        }
+        document.addEventListener('DOMContentLoaded', updateChatBadge);
+        window.addEventListener('storage', function (e) {
+            if (e.key === 'chat-unread-sync') updateChatBadge();
+        });
+
+        // --- Chat Modal Logic ---
+        document.addEventListener('DOMContentLoaded', function () {
+            const chatBtn = document.getElementById('floatingChatBtn');
+            const chatModal = document.getElementById('chatModal');
+            const closeChatModal = document.getElementById('closeChatModal');
+            // Show current user info in chat modal
+            function showCurrentUserInChatModal() {
+                const username = localStorage.getItem('username');
+                const profilePic = localStorage.getItem('profilePic');
+                const usernameSpan = document.getElementById('currentUsername');
+                const profileImg = document.getElementById('currentUserProfilePic');
+                if (usernameSpan) usernameSpan.textContent = username || '';
+                if (profileImg) {
+                    if (profilePic) {
+                        profileImg.src = profilePic;
+                        profileImg.classList.remove('hidden');
+                    } else {
+                        // fallback to avatar
+                        profileImg.src = 'https://ui-avatars.com/api/?name=' + encodeURIComponent(username || 'User');
+                        profileImg.classList.remove('hidden');
+                    }
                 }
             }
-        }
-        function listPetHandler(e) {
-            e.preventDefault();
-            showLoginRequiredPopup();
-        }
-        enforceListPetAuth();
-        // Close popup logic
-        const popup = document.getElementById('loginRequiredPopup');
-        const closeBtn = document.getElementById('closeLoginRequiredPopup');
-        if (closeBtn && popup) {
-            closeBtn.addEventListener('click', function () {
-                popup.classList.add('hidden');
-            });
-        }
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape' && popup && !popup.classList.contains('hidden')) {
-                popup.classList.add('hidden');
-            }
-        });
-    });
-    // Disable nav and main features if not logged in
-    document.addEventListener('DOMContentLoaded', function () {
-        const token = localStorage.getItem('token');
-        const searchNav = document.getElementById('searchNavLink');
-        const storiesNav = document.getElementById('storiesNavLink');
-        const aboutNav = document.getElementById('aboutNavLink');
-        const contactNav = document.getElementById('contactNavLink');
-        if (!token) {
-            if (searchNav) searchNav.addEventListener('click', function (e) { e.preventDefault(); showLoginRequiredPopup(); });
-            if (storiesNav) storiesNav.addEventListener('click', function (e) { e.preventDefault(); showLoginRequiredPopup(); });
-            if (aboutNav) aboutNav.addEventListener('click', function (e) { e.preventDefault(); showLoginRequiredPopup(); });
-            if (contactNav) contactNav.addEventListener('click', function (e) { e.preventDefault(); showLoginRequiredPopup(); });
-        }
-        // Disable hero search if not logged in
-        const searchButton = document.querySelector('.bg-primary.text-white.px-6.py-2');
-        if (!token && searchButton) {
-            searchButton.addEventListener('click', function (e) {
-                e.preventDefault();
-                showLoginRequiredPopup();
-            });
-        }
-    });
-
-    // --- Favorite Button Logic for Pet Cards ---
-    function isLoggedIn() {
-        return !!localStorage.getItem('token');
-    }
-    document.addEventListener('DOMContentLoaded', function () {
-        // Custom checkbox functionality
-        const checkboxes = document.querySelectorAll('.custom-checkbox');
-        checkboxes.forEach(checkbox => {
-            checkbox.addEventListener('click', function () {
-                this.classList.toggle('checked');
-            });
-        });
-        // Favorite button logic
-        document.querySelectorAll('.pet-card').forEach(function(card) {
-            const favBtn = card.querySelector('.favBtn');
-            const toast = card.querySelector('.toast');
-            const loginModal = card.querySelector('.loginModal');
-            let isFavorited = false;
-            if (favBtn) {
-                favBtn.addEventListener('click', function (e) {
-                    if (!isLoggedIn()) {
-                        e.preventDefault();
-                        if (loginModal) loginModal.classList.remove('hidden');
+            if (chatBtn && chatModal) {
+                chatBtn.addEventListener('click', function () {
+                    const token = localStorage.getItem('token');
+                    if (!token) {
+                        showLoginRequiredPopup();
                         return;
                     }
-                    isFavorited = !isFavorited;
-                    const icon = favBtn.querySelector('i');
-                    if (isFavorited) {
-                        icon.classList.remove('ri-heart-line');
-                        icon.classList.add('ri-heart-fill');
-                        favBtn.classList.add('text-primary');
-                        if (toast) {
-                            toast.classList.remove('translate-x-full');
-                            setTimeout(() => toast.classList.add('translate-x-full'), 2000);
-                        }
-                    } else {
-                        icon.classList.remove('ri-heart-fill');
-                        icon.classList.add('ri-heart-line');
-                        favBtn.classList.remove('text-primary');
+                    showCurrentUserInChatModal();
+                    chatModal.classList.remove('hidden');
+                    document.body.style.overflow = 'hidden';
+                });
+            }
+            if (closeChatModal && chatModal) {
+                closeChatModal.addEventListener('click', function () {
+                    chatModal.classList.add('hidden');
+                    document.body.style.overflow = '';
+                });
+                chatModal.addEventListener('click', function (e) {
+                    if (e.target === chatModal) {
+                        chatModal.classList.add('hidden');
+                        document.body.style.overflow = '';
                     }
                 });
             }
-            // Close login modal when clicking outside
-            if (loginModal) {
-                loginModal.addEventListener('click', function (e) {
-                    if (e.target === loginModal) loginModal.classList.add('hidden');
-                });
-                document.addEventListener('keydown', function(e) {
-                    if (e.key === 'Escape') loginModal.classList.add('hidden');
-                });
-            }
-            // View favorites button
-            const viewFavoritesBtn = card.querySelector('.viewFavoritesBtn');
-            if (viewFavoritesBtn && toast) {
-                viewFavoritesBtn.addEventListener('click', function () {
-                    // Add navigation to favorites page
-                    console.log('Navigate to favorites page');
-                    toast.classList.add('translate-x-full');
-                });
-            }
         });
-    });
 
-    // --- Auth-based UI logic for nav and hero search ---
-    document.addEventListener('DOMContentLoaded', function () {
-        const token = localStorage.getItem('token');
-        const username = localStorage.getItem('username');
-        const loginBtn = document.getElementById('loginNavBtn');
-        const registerBtn = document.getElementById('registerNavBtn');
-        const listPetBtn = document.getElementById('listPetNavBtn');
-        const navUsername = document.getElementById('navUsername');
-        const logoutBtn = document.getElementById('logoutBtn');
-        if (token) {
-            if (loginBtn) loginBtn.style.display = 'none';
-            if (registerBtn) registerBtn.style.display = 'none';
-            if (navUsername && username) {
-                navUsername.textContent = username;
-                navUsername.classList.remove('hidden');
+        // --- Login Required Popup & Feature Gating ---
+        function showLoginRequiredPopup() {
+            const popup = document.getElementById('loginRequiredPopup');
+            if (popup) popup.classList.remove('hidden');
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+            // Block "List a Pet" for logged-out users
+            const listPetBtn = document.getElementById('listPetNavBtn');
+            function enforceListPetAuth() {
+                const token = localStorage.getItem('token');
+                if (listPetBtn) {
+                    if (!token) {
+                        listPetBtn.addEventListener('click', listPetHandler);
+                        listPetBtn.setAttribute('href', '#');
+                        listPetBtn.classList.add('cursor-not-allowed');
+                    } else {
+                        listPetBtn.removeEventListener('click', listPetHandler);
+                        listPetBtn.classList.remove('cursor-not-allowed');
+                    }
+                }
             }
-            if (logoutBtn) logoutBtn.classList.remove('hidden');
-            if (listPetBtn) listPetBtn.style.display = '';
-        } else {
-            if (listPetBtn) {
-                listPetBtn.style.display = '';
-                listPetBtn.addEventListener('click', function(e) {
+            function listPetHandler(e) {
+                e.preventDefault();
+                showLoginRequiredPopup();
+            }
+            enforceListPetAuth();
+            // Close popup logic
+            const popup = document.getElementById('loginRequiredPopup');
+            const closeBtn = document.getElementById('closeLoginRequiredPopup');
+            if (closeBtn && popup) {
+                closeBtn.addEventListener('click', function () {
+                    popup.classList.add('hidden');
+                });
+            }
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && popup && !popup.classList.contains('hidden')) {
+                    popup.classList.add('hidden');
+                }
+            });
+        });
+        // Disable nav and main features if not logged in
+        document.addEventListener('DOMContentLoaded', function () {
+            const token = localStorage.getItem('token');
+            const searchNav = document.getElementById('searchNavLink');
+            const storiesNav = document.getElementById('storiesNavLink');
+            const aboutNav = document.getElementById('aboutNavLink');
+            const contactNav = document.getElementById('contactNavLink');
+            if (!token) {
+                if (searchNav) searchNav.addEventListener('click', function (e) { e.preventDefault(); showLoginRequiredPopup(); });
+                if (storiesNav) storiesNav.addEventListener('click', function (e) { e.preventDefault(); showLoginRequiredPopup(); });
+                if (aboutNav) aboutNav.addEventListener('click', function (e) { e.preventDefault(); showLoginRequiredPopup(); });
+                if (contactNav) contactNav.addEventListener('click', function (e) { e.preventDefault(); showLoginRequiredPopup(); });
+            }
+            // Disable hero search if not logged in
+            const searchButton = document.querySelector('.bg-primary.text-white.px-6.py-2');
+            if (!token && searchButton) {
+                searchButton.addEventListener('click', function (e) {
                     e.preventDefault();
                     showLoginRequiredPopup();
                 });
             }
-            if (navUsername) navUsername.classList.add('hidden');
-            if (logoutBtn) logoutBtn.classList.add('hidden');
-            // Disable search in hero section
-            const searchButton = document.querySelector('.bg-primary.text-white.px-6.py-2');
-            if (searchButton) {
-                searchButton.disabled = true;
-                searchButton.classList.add('opacity-50', 'cursor-not-allowed');
-                searchButton.title = 'Login to use search';
-            }
-        }
-        // Logout button logic
-        if (logoutBtn) {
-            logoutBtn.addEventListener('click', function () {
-                localStorage.removeItem('token');
-                localStorage.removeItem('username');
-                window.location.reload();
-            });
-        }
-    });
+        });
 
-    // --- Misc UI logic ---
-    document.addEventListener('DOMContentLoaded', function () {
-        // Custom switch functionality
-        const switches = document.querySelectorAll('.custom-switch input');
-        switches.forEach(switchInput => {
-            switchInput.addEventListener('change', function () {
-                // Switch state is handled by CSS
+        // --- Favorite Button Logic for Pet Cards ---
+        function isLoggedIn() {
+            return !!localStorage.getItem('token');
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+            // Custom checkbox functionality
+            const checkboxes = document.querySelectorAll('.custom-checkbox');
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('click', function () {
+                    this.classList.toggle('checked');
+                });
+            });
+            // Favorite button logic
+            document.querySelectorAll('.pet-card').forEach(function (card) {
+                const favBtn = card.querySelector('.favBtn');
+                const toast = card.querySelector('.toast');
+                const loginModal = card.querySelector('.loginModal');
+                let isFavorited = false;
+                if (favBtn) {
+                    favBtn.addEventListener('click', function (e) {
+                        if (!isLoggedIn()) {
+                            e.preventDefault();
+                            if (loginModal) loginModal.classList.remove('hidden');
+                            return;
+                        }
+                        isFavorited = !isFavorited;
+                        const icon = favBtn.querySelector('i');
+                        if (isFavorited) {
+                            icon.classList.remove('ri-heart-line');
+                            icon.classList.add('ri-heart-fill');
+                            favBtn.classList.add('text-primary');
+                            if (toast) {
+                                toast.classList.remove('translate-x-full');
+                                setTimeout(() => toast.classList.add('translate-x-full'), 2000);
+                            }
+                        } else {
+                            icon.classList.remove('ri-heart-fill');
+                            icon.classList.add('ri-heart-line');
+                            favBtn.classList.remove('text-primary');
+                        }
+                    });
+                }
+                // Close login modal when clicking outside
+                if (loginModal) {
+                    loginModal.addEventListener('click', function (e) {
+                        if (e.target === loginModal) loginModal.classList.add('hidden');
+                    });
+                    document.addEventListener('keydown', function (e) {
+                        if (e.key === 'Escape') loginModal.classList.add('hidden');
+                    });
+                }
+                // View favorites button
+                const viewFavoritesBtn = card.querySelector('.viewFavoritesBtn');
+                if (viewFavoritesBtn && toast) {
+                    viewFavoritesBtn.addEventListener('click', function () {
+                        // Add navigation to favorites page
+                        console.log('Navigate to favorites page');
+                        toast.classList.add('translate-x-full');
+                    });
+                }
             });
         });
-        // Mobile menu toggle (if present)
-        const menuButton = document.querySelector('button[aria-label="Menu"]');
-        const mobileMenu = document.querySelector('.mobile-menu');
-        if (menuButton && mobileMenu) {
-            menuButton.addEventListener('click', function () {
-                mobileMenu.classList.toggle('hidden');
+
+        // --- Auth-based UI logic for nav and hero search ---
+        document.addEventListener('DOMContentLoaded', function () {
+            const token = localStorage.getItem('token');
+            const username = localStorage.getItem('username');
+            const loginBtn = document.getElementById('loginNavBtn');
+            const registerBtn = document.getElementById('registerNavBtn');
+            const listPetBtn = document.getElementById('listPetNavBtn');
+            const navUsername = document.getElementById('navUsername');
+            const logoutBtn = document.getElementById('logoutBtn');
+            if (token) {
+                if (loginBtn) loginBtn.style.display = 'none';
+                if (registerBtn) registerBtn.style.display = 'none';
+                if (navUsername && username) {
+                    navUsername.textContent = username;
+                    navUsername.classList.remove('hidden');
+                }
+                if (logoutBtn) logoutBtn.classList.remove('hidden');
+                if (listPetBtn) listPetBtn.style.display = '';
+            } else {
+                if (listPetBtn) {
+                    listPetBtn.style.display = '';
+                    listPetBtn.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        showLoginRequiredPopup();
+                    });
+                }
+                if (navUsername) navUsername.classList.add('hidden');
+                if (logoutBtn) logoutBtn.classList.add('hidden');
+                // Disable search in hero section
+                const searchButton = document.querySelector('.bg-primary.text-white.px-6.py-2');
+                if (searchButton) {
+                    searchButton.disabled = true;
+                    searchButton.classList.add('opacity-50', 'cursor-not-allowed');
+                    searchButton.title = 'Login to use search';
+                }
+            }
+            // Logout button logic
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', function () {
+                    localStorage.removeItem('token');
+                    localStorage.removeItem('username');
+                    window.location.reload();
+                });
+            }
+        });
+
+        // --- Misc UI logic ---
+        document.addEventListener('DOMContentLoaded', function () {
+            // Custom switch functionality
+            const switches = document.querySelectorAll('.custom-switch input');
+            switches.forEach(switchInput => {
+                switchInput.addEventListener('change', function () {
+                    // Switch state is handled by CSS
+                });
             });
+            // Mobile menu toggle (if present)
+            const menuButton = document.querySelector('button[aria-label="Menu"]');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            if (menuButton && mobileMenu) {
+                menuButton.addEventListener('click', function () {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+            // Chat modal search and chat now logic
+            const shelterSearch = document.getElementById('shelterSearch');
+            const shelterList = document.getElementById('shelterList');
+            if (shelterSearch && shelterList) {
+                shelterSearch.addEventListener('input', function (e) {
+                    const searchTerm = e.target.value.toLowerCase();
+                    const shelters = shelterList.querySelectorAll('.bg-gray-50');
+                    shelters.forEach(shelter => {
+                        const shelterName = shelter.querySelector('h4').textContent.toLowerCase();
+                        const shelterDesc = shelter.querySelector('p').textContent.toLowerCase();
+                        if (shelterName.includes(searchTerm) || shelterDesc.includes(searchTerm)) {
+                            shelter.style.display = '';
+                        } else {
+                            shelter.style.display = 'none';
+                        }
+                    });
+                });
+                // Chat Now button functionality
+                const chatNowButtons = shelterList.querySelectorAll('button');
+                chatNowButtons.forEach(button => {
+                    button.addEventListener('click', function () {
+                        const shelterName = this.closest('.bg-gray-50').querySelector('h4').textContent;
+                        if (chatModal) chatModal.classList.add('hidden');
+                        document.body.style.overflow = '';
+                        // Here you can add logic to open the chat interface with the selected shelter
+                    });
+                });
+            }
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+            // Hero search logic
+            const searchButton = document.querySelector('.bg-primary.text-white.px-6.py-2');
+            const locationInput = document.querySelector('input[placeholder="Enter your location"]');
+            const petTypeSelect = document.querySelector('select');
+            if (searchButton && locationInput && petTypeSelect) {
+                searchButton.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const location = encodeURIComponent(locationInput.value.trim());
+                    const petType = encodeURIComponent(petTypeSelect.value);
+                    let query = [];
+                    if (location) query.push(`location=${location}`);
+                    if (petType) query.push(`type=${petType}`);
+                    const queryString = query.length ? `?${query.join('&')}` : '';
+                    window.location.href = `search.html${queryString}`;
+                });
+            }
+        });
+    </script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/chat.js"></script>
+    <!-- WhatsApp-style Chat JS -->
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+    <script>
+        // --- WhatsApp-style Chat Logic ---
+        const chatUserList = document.getElementById('chatUserList');
+        const chatMessageList = document.getElementById('chatMessageList');
+        const chatInputForm = document.getElementById('chatInputForm');
+        const chatInput = document.getElementById('chatInput');
+        const chatProfilePic = document.getElementById('chatProfilePic');
+        const chatUsername = document.getElementById('chatUsername');
+        let currentChatUser = null;
+        let socket = null;
+
+        function getToken() {
+            return localStorage.getItem('token');
         }
-        // Chat modal search and chat now logic
-        const shelterSearch = document.getElementById('shelterSearch');
-        const shelterList = document.getElementById('shelterList');
-        if (shelterSearch && shelterList) {
-            shelterSearch.addEventListener('input', function (e) {
-                const searchTerm = e.target.value.toLowerCase();
-                const shelters = shelterList.querySelectorAll('.bg-gray-50');
-                shelters.forEach(shelter => {
-                    const shelterName = shelter.querySelector('h4').textContent.toLowerCase();
-                    const shelterDesc = shelter.querySelector('p').textContent.toLowerCase();
-                    if (shelterName.includes(searchTerm) || shelterDesc.includes(searchTerm)) {
-                        shelter.style.display = '';
-                    } else {
-                        shelter.style.display = 'none';
+        function getUsername() {
+            return localStorage.getItem('username');
+        }
+
+        // Connect to Socket.IO if logged in
+        function connectSocket() {
+            if (!socket && getToken()) {
+                socket = io('http://localhost:5000', {
+                    auth: { token: getToken() }
+                });
+                // Join own room for real-time
+                fetch('/api/auth/me', { headers: { 'Authorization': 'Bearer ' + getToken() } })
+                    .then(res => res.json())
+                    .then(user => {
+                        if (user && user._id) socket.emit('join', user._id);
+                    });
+                socket.on('receive_message', (msg) => {
+                    if (currentChatUser && msg.sender === currentChatUser._id) {
+                        appendMessage(msg, false);
+                        scrollMessagesToBottom();
+                    }
+                    updateChatBadge();
+                    loadUserList();
+                });
+                socket.on('message_sent', (msg) => {
+                    if (currentChatUser && msg.receiver === currentChatUser._id) {
+                        appendMessage(msg, true);
+                        scrollMessagesToBottom();
                     }
                 });
-            });
-            // Chat Now button functionality
-            const chatNowButtons = shelterList.querySelectorAll('button');
-            chatNowButtons.forEach(button => {
-                button.addEventListener('click', function () {
-                    const shelterName = this.closest('.bg-gray-50').querySelector('h4').textContent;
-                    if (chatModal) chatModal.classList.add('hidden');
-                    document.body.style.overflow = '';
-                    // Here you can add logic to open the chat interface with the selected shelter
-                });
-            });
+            }
         }
-    });
-    document.addEventListener('DOMContentLoaded', function () {
-        // Hero search logic
-        const searchButton = document.querySelector('.bg-primary.text-white.px-6.py-2');
-        const locationInput = document.querySelector('input[placeholder="Enter your location"]');
-        const petTypeSelect = document.querySelector('select');
-        if (searchButton && locationInput && petTypeSelect) {
-            searchButton.addEventListener('click', function (e) {
-                e.preventDefault();
-                const location = encodeURIComponent(locationInput.value.trim());
-                const petType = encodeURIComponent(petTypeSelect.value);
-                let query = [];
-                if (location) query.push(`location=${location}`);
-                if (petType) query.push(`type=${petType}`);
-                const queryString = query.length ? `?${query.join('&')}` : '';
-                window.location.href = `search.html${queryString}`;
-            });
-        }
-    });
-    </script>
-<script src="/socket.io/socket.io.js"></script>
-<script src="/js/chat.js"></script>
-<!-- WhatsApp-style Chat JS -->
-<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
-<script>
-// --- WhatsApp-style Chat Logic ---
-const chatUserList = document.getElementById('chatUserList');
-const chatMessageList = document.getElementById('chatMessageList');
-const chatInputForm = document.getElementById('chatInputForm');
-const chatInput = document.getElementById('chatInput');
-const chatProfilePic = document.getElementById('chatProfilePic');
-const chatUsername = document.getElementById('chatUsername');
-let currentChatUser = null;
-let socket = null;
 
-function getToken() {
-  return localStorage.getItem('token');
-}
-function getUsername() {
-  return localStorage.getItem('username');
-}
-
-// Connect to Socket.IO if logged in
-function connectSocket() {
-  if (!socket && getToken()) {
-    socket = io('http://localhost:5000', {
-      auth: { token: getToken() }
-    });
-    // Join own room for real-time
-    fetch('/api/auth/me', { headers: { 'Authorization': 'Bearer ' + getToken() } })
-      .then(res => res.json())
-      .then(user => {
-        if (user && user._id) socket.emit('join', user._id);
-      });
-    socket.on('receive_message', (msg) => {
-      if (currentChatUser && msg.sender === currentChatUser._id) {
-        appendMessage(msg, false);
-        scrollMessagesToBottom();
-      }
-      updateChatBadge();
-      loadUserList();
-    });
-    socket.on('message_sent', (msg) => {
-      if (currentChatUser && msg.receiver === currentChatUser._id) {
-        appendMessage(msg, true);
-        scrollMessagesToBottom();
-      }
-    });
-  }
-}
-
-// Load chat user list
-function loadUserList() {
-  if (!chatUserList) return;
-  fetch('/api/chat/users', { headers: { 'Authorization': 'Bearer ' + getToken() } })
-    .then(res => res.json())
-    .then(users => {
-      chatUserList.innerHTML = '';
-      users.forEach(user => {
-        const div = document.createElement('div');
-        div.className = 'flex items-center p-3 hover:bg-primary/10 cursor-pointer border-b border-gray-100';
-        div.innerHTML = `
+        // Load chat user list
+        function loadUserList() {
+            if (!chatUserList) return;
+            fetch('/api/chat/users', { headers: { 'Authorization': 'Bearer ' + getToken() } })
+                .then(res => res.json())
+                .then(users => {
+                    chatUserList.innerHTML = '';
+                    users.forEach(user => {
+                        const div = document.createElement('div');
+                        div.className = 'flex items-center p-3 hover:bg-primary/10 cursor-pointer border-b border-gray-100';
+                        div.innerHTML = `
           <img src="${user.profilePic || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(user.username)}" class="w-10 h-10 rounded-full object-cover mr-3" />
           <div class="flex-1">
             <div class="font-semibold text-gray-900">${user.username}</div>
@@ -1413,99 +1421,99 @@ function loadUserList() {
           <span class="text-xs text-gray-400">${user.lastMessage ? formatTime(user.lastMessage.timestamp) : ''}</span>
           ${user.unreadCount > 0 ? `<span class="ml-2 bg-red-500 text-white text-xs rounded-full px-2 py-0.5">${user.unreadCount}</span>` : ''}
         `;
-        div.onclick = () => selectChatUser(user);
-        chatUserList.appendChild(div);
-      });
-    });
-}
+                        div.onclick = () => selectChatUser(user);
+                        chatUserList.appendChild(div);
+                    });
+                });
+        }
 
-function selectChatUser(user) {
-  currentChatUser = user;
-  chatProfilePic.src = user.profilePic || ('https://ui-avatars.com/api/?name=' + encodeURIComponent(user.username));
-  chatProfilePic.classList.remove('hidden');
-  chatUsername.textContent = user.username;
-  chatMessageList.innerHTML = '';
-  fetch(`/api/chat/messages/${user._id}`, { headers: { 'Authorization': 'Bearer ' + getToken() } })
-    .then(res => res.json())
-    .then(messages => {
-      messages.forEach(msg => appendMessage(msg, msg.sender === getUserId()));
-      scrollMessagesToBottom();
-    });
-}
+        function selectChatUser(user) {
+            currentChatUser = user;
+            chatProfilePic.src = user.profilePic || ('https://ui-avatars.com/api/?name=' + encodeURIComponent(user.username));
+            chatProfilePic.classList.remove('hidden');
+            chatUsername.textContent = user.username;
+            chatMessageList.innerHTML = '';
+            fetch(`/api/chat/messages/${user._id}`, { headers: { 'Authorization': 'Bearer ' + getToken() } })
+                .then(res => res.json())
+                .then(messages => {
+                    messages.forEach(msg => appendMessage(msg, msg.sender === getUserId()));
+                    scrollMessagesToBottom();
+                });
+        }
 
-function appendMessage(msg, isSender) {
-  const div = document.createElement('div');
-  div.className = 'flex items-end mb-2 ' + (isSender ? 'justify-end' : '');
-  div.innerHTML = isSender
-    ? `<span class="text-xs text-gray-400 mr-2">${formatTime(msg.timestamp)}</span><div class="bg-primary text-white rounded-lg rounded-br-none p-3 max-w-xs"><p class="text-sm">${escapeHtml(msg.content)}</p></div>`
-    : `<div class="bg-white rounded-lg rounded-bl-none p-3 max-w-xs shadow-sm"><p class="text-sm text-gray-700">${escapeHtml(msg.content)}</p></div><span class="text-xs text-gray-400 ml-2">${formatTime(msg.timestamp)}</span>`;
-  chatMessageList.appendChild(div);
-}
+        function appendMessage(msg, isSender) {
+            const div = document.createElement('div');
+            div.className = 'flex items-end mb-2 ' + (isSender ? 'justify-end' : '');
+            div.innerHTML = isSender
+                ? `<span class="text-xs text-gray-400 mr-2">${formatTime(msg.timestamp)}</span><div class="bg-primary text-white rounded-lg rounded-br-none p-3 max-w-xs"><p class="text-sm">${escapeHtml(msg.content)}</p></div>`
+                : `<div class="bg-white rounded-lg rounded-bl-none p-3 max-w-xs shadow-sm"><p class="text-sm text-gray-700">${escapeHtml(msg.content)}</p></div><span class="text-xs text-gray-400 ml-2">${formatTime(msg.timestamp)}</span>`;
+            chatMessageList.appendChild(div);
+        }
 
-function scrollMessagesToBottom() {
-  chatMessageList.scrollTop = chatMessageList.scrollHeight;
-}
+        function scrollMessagesToBottom() {
+            chatMessageList.scrollTop = chatMessageList.scrollHeight;
+        }
 
-function formatTime(ts) {
-  if (!ts) return '';
-  const d = new Date(ts);
-  return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-}
+        function formatTime(ts) {
+            if (!ts) return '';
+            const d = new Date(ts);
+            return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        }
 
-function escapeHtml(text) {
-  return text.replace(/[&<>"]/g, function(c) {
-    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];
-  });
-}
+        function escapeHtml(text) {
+            return text.replace(/[&<>"]/g, function (c) {
+                return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+            });
+        }
 
-function getUserId() {
-  // Fetch user id from /api/auth/me (sync for now)
-  let id = localStorage.getItem('userId');
-  if (id) return id;
-  const req = new XMLHttpRequest();
-  req.open('GET', '/api/auth/me', false);
-  req.setRequestHeader('Authorization', 'Bearer ' + getToken());
-  req.send(null);
-  if (req.status === 200) {
-    const user = JSON.parse(req.responseText);
-    if (user && user._id) {
-      localStorage.setItem('userId', user._id);
-      return user._id;
-    }
-  }
-  return null;
-}
+        function getUserId() {
+            // Fetch user id from /api/auth/me (sync for now)
+            let id = localStorage.getItem('userId');
+            if (id) return id;
+            const req = new XMLHttpRequest();
+            req.open('GET', '/api/auth/me', false);
+            req.setRequestHeader('Authorization', 'Bearer ' + getToken());
+            req.send(null);
+            if (req.status === 200) {
+                const user = JSON.parse(req.responseText);
+                if (user && user._id) {
+                    localStorage.setItem('userId', user._id);
+                    return user._id;
+                }
+            }
+            return null;
+        }
 
-if (window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname === '') {
-  document.addEventListener('DOMContentLoaded', function () {
-    connectSocket();
-    loadUserList();
-    if (chatInputForm) {
-      chatInputForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-        if (!chatInput.value.trim() || !currentChatUser) return;
-        socket.emit('send_message', {
-          sender: getUserId(),
-          receiver: currentChatUser._id,
-          content: chatInput.value.trim()
-        });
-        chatInput.value = '';
-      });
-    }
-    // User search
-    const chatUserSearch = document.getElementById('chatUserSearch');
-    if (chatUserSearch) {
-      chatUserSearch.addEventListener('input', function () {
-        const term = this.value.toLowerCase();
-        Array.from(chatUserList.children).forEach(child => {
-          const name = child.querySelector('.font-semibold').textContent.toLowerCase();
-          child.style.display = name.includes(term) ? '' : 'none';
-        });
-      });
-    }
-  });
-}
-</script>
+        if (window.location.pathname.endsWith('index.html') || window.location.pathname === '/' || window.location.pathname === '') {
+            document.addEventListener('DOMContentLoaded', function () {
+                connectSocket();
+                loadUserList();
+                if (chatInputForm) {
+                    chatInputForm.addEventListener('submit', function (e) {
+                        e.preventDefault();
+                        if (!chatInput.value.trim() || !currentChatUser) return;
+                        socket.emit('send_message', {
+                            sender: getUserId(),
+                            receiver: currentChatUser._id,
+                            content: chatInput.value.trim()
+                        });
+                        chatInput.value = '';
+                    });
+                }
+                // User search
+                const chatUserSearch = document.getElementById('chatUserSearch');
+                if (chatUserSearch) {
+                    chatUserSearch.addEventListener('input', function () {
+                        const term = this.value.toLowerCase();
+                        Array.from(chatUserList.children).forEach(child => {
+                            const name = child.querySelector('.font-semibold').textContent.toLowerCase();
+                            child.style.display = name.includes(term) ? '' : 'none';
+                        });
+                    });
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>

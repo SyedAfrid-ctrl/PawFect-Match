@@ -1,66 +1,173 @@
 <!-- public/register.html -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Register</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen">
-  <div class="bg-white p-8 rounded shadow-md w-full max-w-md">
-    <h2 class="text-2xl font-bold mb-6 text-center text-indigo-600">Create an Account</h2>
-    <form id="registerForm" class="space-y-4">
-      <div>
-        <label class="block text-sm font-medium">Username</label>
-        <input type="text" id="username" class="w-full border border-gray-300 rounded px-3 py-2" required>
-      </div>
-      <div>
-        <label class="block text-sm font-medium">Email</label>
-        <input type="email" id="email" class="w-full border border-gray-300 rounded px-3 py-2" required>
-      </div>
-      <div>
-        <label class="block text-sm font-medium">Password</label>
-        <input type="password" id="password" class="w-full border border-gray-300 rounded px-3 py-2" required>
-      </div>
-      <button type="submit" class="w-full bg-indigo-600 text-white py-2 rounded hover:bg-indigo-500">
-        Register
-      </button>
-    </form>
-    <p id="message" class="text-center text-sm mt-4 text-red-500"></p>
-  </div>
-
-  <script>
-    const form = document.getElementById('registerForm');
-    const message = document.getElementById('message');
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      message.textContent = '';
-
-      const username = document.getElementById('username').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const password = document.getElementById('password').value;
-
-      try {
-        const res = await fetch('http://127.0.0.1:5000/api/auth/register', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ username, email, password })
-        });
-
-        const data = await res.json();
-
-        if (res.ok) {
-          alert('Registration successful! Redirecting to login page...');
-          window.location.href = 'login.html'; // Adjust if needed
-        } else {
-          message.textContent = data.error || 'Something went wrong.';
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PawfectMatch - Sign Up</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6366f1',
+                        secondary: '#f97316'
+                    },
+                    borderRadius: {
+                        'none': '0px',
+                        'sm': '4px',
+                        DEFAULT: '8px',
+                        'md': '12px',
+                        'lg': '16px',
+                        'xl': '20px',
+                        '2xl': '24px',
+                        '3xl': '32px',
+                        'full': '9999px',
+                        'button': '8px'
+                    }
+                }
+            }
         }
-      } catch (err) {
-        message.textContent = 'Failed to connect to server.';
-        console.error(err);
-      }
-    });
-  </script>
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&family=Pacifico&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet">
+    <style>
+        :where([class^="ri-"])::before {
+            content: "\f3c2";
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f9fafb;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Nunito', sans-serif;
+        }
+
+        .logo {
+            font-family: 'Pacifico', serif;
+        }
+
+        .form-input:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .password-toggle:focus {
+            outline: none;
+        }
+
+        .social-login-btn {
+            transition: all 0.2s ease;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col">
+    <div class="flex-1 flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 py-12">
+        <div class="w-full max-w-md">
+            <div class="text-center mb-8">
+                <a href="index.html"
+                    class="flex items-center justify-center text-primary text-3xl font-bold hover:text-primary/80 transition-colors"
+                    data-readdy="true" class="inline-flex items-center">
+                    <div class="w-10 h-10 flex items-center justify-center text-primary text-2xl">
+                        🐾
+                    </div>
+                    <span class="ml-2 text-2xl text-gray-800 logo"
+                        style="font-family: 'Pacifico', serif;">PawfectMatch</span>
+                </a>
+            </div>
+            <div class="bg-white shadow-md rounded-lg p-8">
+                <h1 class="text-2xl font-bold text-gray-900 mb-2 text-center">Create Your Account</h1>
+                <form id="registerForm" class="space-y-4">
+                    <div>
+                        <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+                        <input type="text" id="username" name="username"
+                            class="form-input w-full border border-gray-300 rounded px-3 py-2" required>
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                        <input type="email" id="email" name="email"
+                            class="form-input w-full border border-gray-300 rounded px-3 py-2" required>
+                    </div>
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                        <input type="password" id="password" name="password"
+                            class="form-input w-full border border-gray-300 rounded px-3 py-2" required>
+                    </div>
+                    <div>
+                        <label for="confirmPassword" class="block text-sm font-medium text-gray-700">Confirm
+                            Password</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword"
+                            class="form-input w-full border border-gray-300 rounded px-3 py-2" required>
+                    </div>
+                    <button type="submit"
+                        class="w-full bg-primary text-white py-2 rounded-button font-medium hover:bg-primary/90">Sign
+                        Up</button>
+                </form>
+                <div class="mt-6">
+                    <p class="text-center text-sm text-gray-600">Or sign up with</p>
+                    <div class="flex justify-center space-x-4 mt-4">
+                        <button
+                            class="social-login-btn bg-blue-600 text-white px-4 py-2 rounded-button font-medium hover:bg-blue-500">
+                            <i class="ri-google-line mr-2"></i> Google
+                        </button>
+                        <button
+                            class="social-login-btn bg-blue-800 text-white px-4 py-2 rounded-button font-medium hover:bg-blue-700">
+                            <i class="ri-facebook-fill mr-2"></i> Facebook
+                        </button>
+                    </div>
+                </div>
+                <p class="text-center text-sm text-gray-600 mt-4">Already have an account? <a href="login.html"
+                    class="text-primary font-medium hover:underline">Log In</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('registerForm');
+        const message = document.getElementById('message');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            message.textContent = '';
+
+            const username = document.getElementById('username').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+
+            try {
+                const res = await fetch('http://127.0.0.1:5000/api/auth/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, email, password })
+                });
+
+                const data = await res.json();
+
+                if (res.ok) {
+                    alert('Registration successful! Redirecting to login page...');
+                    window.location.href = 'login.html'; // Adjust if needed
+                } else {
+                    message.textContent = data.error || 'Something went wrong.';
+                }
+            } catch (err) {
+                message.textContent = 'Failed to connect to server.';
+                console.error(err);
+            }
+        });
+    </script>
 </body>
+
 </html>
