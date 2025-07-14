@@ -1,0 +1,15 @@
+# Ignore environment variables
+.env
+
+# Ignore uploaded images
+uploads/
+
+# Node modules (if present)
+node_modules/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
