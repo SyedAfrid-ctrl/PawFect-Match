@@ -39,38 +39,60 @@
             <div class="w-16 h-16 flex items-center justify-center text-primary text-4xl">
                 🐾
             </div>
-            <span class="ml-4 text-4xl font-bold text-gray-800 logo" style="font-family: 'Pacifico', serif;">PawfectMatch</span>
+            <span class="ml-4 text-4xl font-bold text-gray-800 logo" style="font-family: 'Pacifico', serif;">PawfectMatch
+            </span>
         </div>
         <h1 class="text-4xl font-bold text-gray-900 mb-6">List a Pet</h1>
         <form class="bg-white p-6 rounded-lg shadow-lg" id="petListingForm">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Pet Name</label>
-                    <input type="text" id="petName" placeholder="Enter pet name" class="w-full border border-gray-300 rounded py-2 px-4 text-sm focus:ring-2 focus:ring-primary/20 focus:outline-none" required>
+                    <input type="text" id="petName" name="petName" placeholder="Enter pet name"
+                        class="form-input w-full border border-gray-300 rounded px-3 py-2" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Type</label>
+                    <select id="petType" name="petType"
+                        class="form-select w-full border border-gray-300 rounded px-3 py-2" required>
+                        <option value="cat">Cat</option>
+                        <option value="dog">Dog</option>
+                        <option value="bird">Bird</option>
+                        <option value="small and furry">Small and Furry</option>
+                    </select>
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Age</label>
-                    <input type="number" id="petAge" placeholder="Enter pet age" class="w-full border border-gray-300 rounded py-2 px-4 text-sm focus:ring-2 focus:ring-primary/20 focus:outline-none" required>
+                    <input type="text" id="petAge" name="petAge" placeholder="Enter pet age"
+                        class="form-input w-full border border-gray-300 rounded px-3 py-2" required>
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Breed</label>
-                    <input type="text" id="petBreed" placeholder="Enter pet breed" class="w-full border border-gray-300 rounded py-2 px-4 text-sm focus:ring-2 focus:ring-primary/20 focus:outline-none" required>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Gender</label>
+                    <select id="petGender" name="petGender"
+                        class="form-select w-full border border-gray-300 rounded px-3 py-2" required>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Location</label>
-                    <input type="text" id="petLocation" placeholder="Enter location" class="w-full border border-gray-300 rounded py-2 px-4 text-sm focus:ring-2 focus:ring-primary/20 focus:outline-none" required>
+                    <input type="text" id="petLocation" name="petLocation" placeholder="Enter location"
+                        class="form-input w-full border border-gray-300 rounded px-3 py-2" required>
                 </div>
             </div>
             <div class="mt-6">
                 <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
-                <textarea id="petDescription" placeholder="Enter pet description" class="w-full border border-gray-300 rounded py-2 px-4 text-sm focus:ring-2 focus:ring-primary/20 focus:outline-none" rows="3"></textarea>
+                <textarea id="petDescription" name="petDescription" placeholder="Enter pet description"
+                    class="form-input w-full border border-gray-300 rounded px-3 py-2" required></textarea>
             </div>
             <div class="mt-6">
                 <label class="block text-sm font-medium text-gray-700 mb-1">Upload Image</label>
-                <input type="file" id="petImage" class="w-full border border-gray-300 rounded py-2 px-4 text-sm focus:ring-2 focus:ring-primary/20 focus:outline-none" accept="image/*" required>
+                <input type="file" id="petImage" name="petImage"
+                    class="form-input w-full border border-gray-300 rounded px-3 py-2" required>
             </div>
             <div class="mt-6">
-                <button type="submit" class="bg-primary text-white px-4 py-2 rounded-button font-medium hover:bg-primary/90">Submit</button>
+                <button type="submit"
+                    class="w-full bg-primary text-white py-2 rounded-button font-medium hover:bg-primary/90">Submit
+                </button>
             </div>
         </form>
         <div id="listingSuccess" class="hidden text-green-600 text-center mt-4">Pet listed successfully!</div>

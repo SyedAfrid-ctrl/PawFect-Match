@@ -1,78 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registered Shelters</title>
     <script src="https://cdn.tailwindcss.com/3.4.16"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#6366f1',
-                        secondary: '#f97316'
-                    },
-                    borderRadius: {
-                        none: '0px',
-                        sm: '4px',
-                        DEFAULT: '8px',
-                        md: '12px',
-                        lg: '16px',
-                        xl: '20px',
-                        '2xl': '24px',
-                        '3xl': '32px',
-                        full: '9999px',
-                        button: '8px'
-                    }
-                }
-            }
-        };
-    </script>
+    <link href="css/style.css" rel="stylesheet">
+    <style>
+        .shelter-card {
+            transition: box-shadow 0.2s, transform 0.2s;
+        }
+        .shelter-card:hover {
+            box-shadow: 0 8px 32px rgba(99,102,241,0.15);
+            transform: translateY(-4px) scale(1.02);
+        }
+        .shelter-img {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+    </style>
 </head>
-
-<body class="bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h1 class="text-4xl font-bold text-gray-900 mb-6">Registered Shelters</h1>
-        <div id="sheltersContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- Shelters will be dynamically loaded here -->
+<body class="bg-gradient-to-br from-gray-50 to-blue-50 min-h-screen">
+    <nav class="bg-white shadow-sm w-full">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <a href="index.html" class="flex items-center">
+                    <div class="w-10 h-10 flex items-center justify-center text-primary text-2xl">🐾</div>
+                    <span class="ml-2 text-2xl text-gray-800 logo">PawfectMatch</span>
+                </a>
+                <div class="flex space-x-6">
+                    <a href="search.html" class="text-gray-700 hover:text-primary font-medium">Search Pets</a>
+                    <a href="stories.html" class="text-gray-700 hover:text-primary font-medium">Pawfect Stories</a>
+                    <a href="registered-shelters.html" class="text-primary font-bold">Shelters</a>
+                </div>
+            </div>
         </div>
+    </nav>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <h1 class="text-4xl font-bold text-primary mb-10 text-center">Registered Shelters</h1>
+        <div id="sheltersContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
     </div>
     <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-            const sheltersContainer = document.getElementById('sheltersContainer');
-
-            try {
-                const res = await fetch('/api/shelters', {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem('token')}`
-                    }
-                });
-
-                if (!res.ok) {
-                    throw new Error('Failed to fetch shelters');
-                }
-
-                const shelters = await res.json();
-                sheltersContainer.innerHTML = shelters.map(shelter => `
-                    <div class="bg-white p-6 rounded-lg shadow-lg">
-                        <h2 class="text-2xl font-bold text-gray-900 mb-2">${shelter.shelterName}</h2>
-                        <p class="text-gray-700 mb-4">${shelter.description}</p>
-                        <p class="text-gray-500 text-sm">Owner: ${shelter.ownerName}</p>
-                        <p class="text-gray-500 text-sm">Contact: ${shelter.contactDetails}</p>
-                        ${shelter.shelterWebsite ? `<a href="${shelter.shelterWebsite}" class="text-primary hover:underline">Visit Website</a>` : ''}
-                        <div class="mt-4 grid grid-cols-2 gap-2">
-                            ${shelter.images.map(image => `<img src="${image}" alt="Shelter Image" class="w-full h-32 object-cover rounded">`).join('')}
-                        </div>
-                    </div>
-                `).join('');
-            } catch (error) {
-                sheltersContainer.innerHTML = '<p class="text-red-600">Failed to load shelters. Please try again later.</p>';
-                console.error(error);
+    document.addEventListener('DOMContentLoaded', async () => {
+        const sheltersContainer = document.getElementById('sheltersContainer');
+        const token = localStorage.getItem('token');
+        if (!token) {
+            sheltersContainer.innerHTML = '<p class="text-red-600 text-center">You must be logged in to view registered shelters.</p>';
+            return;
+        }
+        try {
+            const res = await fetch('http://localhost:5000/api/shelters', {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+            if (!res.ok) throw new Error('Failed to fetch shelters');
+            const shelters = await res.json();
+            if (!shelters.length) {
+                sheltersContainer.innerHTML = '<p class="text-gray-600 text-center">No shelters registered yet.</p>';
+                return;
             }
-        });
+            sheltersContainer.innerHTML = shelters.map(shelter => `
+                <div class="shelter-card bg-white p-6 rounded-2xl shadow-lg flex flex-col items-center">
+                    <div class="w-24 h-24 mb-4 rounded-full overflow-hidden border-4 border-primary bg-gray-100 flex items-center justify-center">
+                        ${shelter.images && shelter.images.length ? `<img src="/uploads/imgShelter/${shelter.images[0].split('imgShelter/').pop()}" alt="Shelter Image" class="shelter-img w-full h-full object-cover">` : `<span class="text-4xl">🏠</span>`}
+                    </div>
+                    <h2 class="text-xl font-bold text-gray-900 mb-2 text-center">${shelter.shelterName}</h2>
+                    <p class="text-gray-700 mb-2 text-center">${shelter.description}</p>
+                    <div class="mb-2 text-sm text-gray-500 text-center">Owner: <span class="font-semibold">${shelter.ownerName}</span></div>
+                    <div class="mb-2 text-sm text-gray-500 text-center">Contact: <span class="font-semibold">${shelter.contactNumber}</span></div>
+                    <div class="mb-2 text-sm text-gray-500 text-center">Email: <span class="font-semibold">${shelter.contactEmail}</span></div>
+                    ${shelter.shelterWebsite ? `<a href="${shelter.shelterWebsite}" target="_blank" class="text-primary hover:underline font-medium">Visit Website</a>` : ''}
+                    ${shelter.images && shelter.images.length > 1 ? `<div class="mt-4 grid grid-cols-2 gap-2">${shelter.images.slice(1).map(image => `<img src="/uploads/imgShelter/${image.split('imgShelter/').pop()}" alt="Shelter Image" class="shelter-img w-full h-24 object-cover rounded-lg">`).join('')}</div>` : ''}
+                </div>
+            `).join('');
+        } catch (error) {
+            sheltersContainer.innerHTML = '<p class="text-red-600 text-center">Failed to load shelters. Please try again later.</p>';
+            console.error(error);
+        }
+    });
     </script>
 </body>
-
 </html>

@@ -58,7 +58,7 @@ app.use('/api/shelters', shelterRoutes);
 
 // Static file serving should come after API routes
 app.use(express.static('public'));
-app.use('/uploads', express.static('uploads'));
+app.use('/uploads', express.static(require('path').join(__dirname, 'uploads')));
 
 // Add filtering for pets by type, age, and location
 app.get('/api/pets', async (req, res) => {

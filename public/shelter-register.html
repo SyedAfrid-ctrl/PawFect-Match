@@ -50,8 +50,12 @@
                     <input type="url" id="shelterWebsite" name="shelterWebsite" class="form-input w-full border border-gray-300 rounded px-3 py-2">
                 </div>
                 <div>
-                    <label for="contactDetails" class="block text-sm font-medium text-gray-700">Contact Details</label>
-                    <input type="text" id="contactDetails" name="contactDetails" class="form-input w-full border border-gray-300 rounded px-3 py-2" required>
+                    <label for="contactNumber" class="block text-sm font-medium text-gray-700">Contact Number</label>
+                    <input type="tel" id="contactNumber" name="contactNumber" class="form-input w-full border border-gray-300 rounded px-3 py-2" required pattern="^\+?[0-9]{10,15}$" title="Enter a valid mobile number (10-15 digits)" placeholder="Mobile (+1234567890)">
+                </div>
+                <div>
+                    <label for="contactEmail" class="block text-sm font-medium text-gray-700">Contact Email</label>
+                    <input type="email" id="contactEmail" name="contactEmail" class="form-input w-full border border-gray-300 rounded px-3 py-2" required placeholder="example@domain.com">
                 </div>
             </div>
             <div class="mt-6">
@@ -60,13 +64,36 @@
             </div>
             <div class="mt-6">
                 <label for="images" class="block text-sm font-medium text-gray-700">Upload Images</label>
-                <input type="file" id="images" name="images" class="form-input w-full border border-gray-300 rounded px-3 py-2" multiple required>
+                <input type="file" id="images" name="images" class="form-input w-full border border-gray-300 rounded px-3 py-2" multiple>
             </div>
             <div class="mt-6">
                 <button type="submit" class="w-full bg-primary text-white py-2 rounded-button font-medium hover:bg-primary/90">Submit</button>
             </div>
         </form>
     </div>
+    <script>
+        document.getElementById('shelterForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const form = e.target;
+            const formData = new FormData(form);
+            const token = localStorage.getItem('token');
+
+            try {
+                const res = await fetch('http://localhost:5000/api/shelters/register', {
+                    method: 'POST',
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    },
+                    body: formData
+                });
+                if (!res.ok) throw new Error('Failed to register shelter');
+                alert('Shelter registered successfully!');
+                form.reset();
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        });
+    </script>
 </body>
 
 </html>
