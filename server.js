@@ -53,7 +53,7 @@ app.use('/api/pets', petRoutes);
 app.use('/api/adoptions', adoptionsRoutes);
 app.use('/api/stories', storiesRoutes);
 app.use('/api/chat', chatRoutes);
-app.use('/api/adoption-request', (req, res, next) => next()); // Ensure adoption request route is mounted
+// Removed legacy adoption request route
 app.use('/api/shelters', shelterRoutes);
 
 // Static file serving should come after API routes
@@ -75,50 +75,7 @@ app.get('/api/pets', async (req, res) => {
   }
 });
 
-// Route to handle adoption requests
-app.post('/api/adoption-request', async (req, res) => {
-  try {
-    console.log('Request body:', req.body); // Log request body
-
-    const { user_id, pet_id, user_email, pet_name, owner_id, owner_username, logged_in_username } = req.body;
-
-    // Create a new adoption request
-    const newRequest = new AdoptionRequest({ user_id, pet_id, owner_id, owner_username });
-    await newRequest.save();
-
-    // Send notification email
-    const transporter = nodemailer.createTransport({
-      host: 'smtp.gmail.com',
-      port: 587,
-      secure: false, // true for 465, false for other ports
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
-      }
-    });
-
-    const mailOptions = {
-      from: `PawFect Match <${process.env.EMAIL_USER}>`,
-      to: user_email,
-      subject: `Adoption Request for ${pet_name}`,
-      text: `Hi ${owner_username},
-
-You have received an adoption request for ${pet_name} from ${logged_in_username}. Please log in to your account to review the request.
-
-Best regards,
-PawFect Match Team`
-    };
-
-    console.log('Email options:', mailOptions); // Log email options
-
-    await transporter.sendMail(mailOptions);
-
-    res.status(201).json({ message: 'Adoption request submitted successfully and email notification sent.' });
-  } catch (error) {
-    console.error('Error handling adoption request:', error);
-    res.status(500).json({ error: 'Failed to submit adoption request.' });
-  }
-});
+// Removed route to handle adoption requests
 
 // Socket.IO real-time chat handlers
 io.on('connection', (socket) => {

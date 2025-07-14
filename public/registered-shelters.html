@@ -28,9 +28,9 @@
                     <span class="ml-2 text-2xl text-gray-800 logo">PawfectMatch</span>
                 </a>
                 <div class="flex space-x-6">
-                    <a href="search.html" class="text-gray-700 hover:text-primary font-medium">Search Pets</a>
-                    <a href="stories.html" class="text-gray-700 hover:text-primary font-medium">Pawfect Stories</a>
-                    <a href="registered-shelters.html" class="text-primary font-bold">Shelters</a>
+                    <a href="search.html" class="text-gray-700 hover:text-primary hover:underline font-medium">Search Pets</a>
+                    <a href="stories.html" class="text-gray-700 hover:text-primary hover:underline font-medium">Pawfect Stories</a>
+                    <a href="registered-shelters.html" class="text-primary font-bold hover:underline">Shelters</a>
                 </div>
             </div>
         </div>
@@ -57,20 +57,26 @@
                 sheltersContainer.innerHTML = '<p class="text-gray-600 text-center">No shelters registered yet.</p>';
                 return;
             }
-            sheltersContainer.innerHTML = shelters.map(shelter => `
+            sheltersContainer.innerHTML = shelters.map(shelter => {
+                const imageUrl = shelter.images && shelter.images.length && shelter.images[0]
+                    ? `/${shelter.images[0]}`
+                    : '/img/placeholder.jpg';
+                return `
                 <div class="shelter-card bg-white p-6 rounded-2xl shadow-lg flex flex-col items-center">
-                    <div class="w-24 h-24 mb-4 rounded-full overflow-hidden border-4 border-primary bg-gray-100 flex items-center justify-center">
-                        ${shelter.images && shelter.images.length ? `<img src="/uploads/imgShelter/${shelter.images[0].split('imgShelter/').pop()}" alt="Shelter Image" class="shelter-img w-full h-full object-cover">` : `<span class="text-4xl">🏠</span>`}
-                    </div>
+                    <img src="${imageUrl}" class="w-full h-48 object-cover rounded mb-4 shelter-img" alt="Shelter Image">
                     <h2 class="text-xl font-bold text-gray-900 mb-2 text-center">${shelter.shelterName}</h2>
-                    <p class="text-gray-700 mb-2 text-center">${shelter.description}</p>
+                    <p class="text-gray-700 mb-2 text-center break-words max-w-full overflow-hidden" style="word-break:break-word;white-space:pre-line;max-height:6em;line-height:1.5;">${shelter.description}</p>
                     <div class="mb-2 text-sm text-gray-500 text-center">Owner: <span class="font-semibold">${shelter.ownerName}</span></div>
                     <div class="mb-2 text-sm text-gray-500 text-center">Contact: <span class="font-semibold">${shelter.contactNumber}</span></div>
                     <div class="mb-2 text-sm text-gray-500 text-center">Email: <span class="font-semibold">${shelter.contactEmail}</span></div>
                     ${shelter.shelterWebsite ? `<a href="${shelter.shelterWebsite}" target="_blank" class="text-primary hover:underline font-medium">Visit Website</a>` : ''}
-                    ${shelter.images && shelter.images.length > 1 ? `<div class="mt-4 grid grid-cols-2 gap-2">${shelter.images.slice(1).map(image => `<img src="/uploads/imgShelter/${image.split('imgShelter/').pop()}" alt="Shelter Image" class="shelter-img w-full h-24 object-cover rounded-lg">`).join('')}</div>` : ''}
+                    ${shelter.images && shelter.images.length > 1 ? `<div class="mt-4 grid grid-cols-2 gap-2">${shelter.images.slice(1).map(image => {
+                        const extraImageUrl = image ? `/${image}` : '/img/placeholder.jpg';
+                        return `<img src="${extraImageUrl}" alt="Shelter Image" class="shelter-img w-full h-24 object-cover rounded-lg">`;
+                    }).join('')}</div>` : ''}
                 </div>
-            `).join('');
+                `;
+            }).join('');
         } catch (error) {
             sheltersContainer.innerHTML = '<p class="text-red-600 text-center">Failed to load shelters. Please try again later.</p>';
             console.error(error);

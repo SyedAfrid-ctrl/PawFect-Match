@@ -8,7 +8,7 @@ const { authenticate } = require('../middleware/auth');
 // Multer setup for image uploads
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, path.join(__dirname, '../uploads/imgShelter'));
+        cb(null, path.join(__dirname, '../uploads'));
     },
     filename: (req, file, cb) => {
         cb(null, `${Date.now()}-${file.originalname}`);
@@ -31,7 +31,11 @@ router.post('/register', authenticate, upload.array('images', 10), async (req, r
         console.log('Step 2: Body:', req.body);
         console.log('Step 3: Files:', req.files);
         const { ownerName, shelterName, shelterWebsite, contactNumber, contactEmail, description } = req.body;
-        const images = req.files && req.files.length > 0 ? req.files.map(file => file.path) : [];
+        // Save only the filename for frontend use, even if multer returns a full path
+        // Store only the filename for consistency with pet images
+        const images = req.files && req.files.length > 0
+            ? req.files.map(file => (file.filename || file.path || '').split(/[\\/]/).pop())
+            : [];
 
         if (!ownerName || !shelterName || !contactNumber || !contactEmail || !description) {
             responded = true;
