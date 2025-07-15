@@ -59,7 +59,7 @@
             }
             sheltersContainer.innerHTML = shelters.map(shelter => {
                 const imageUrl = shelter.images && shelter.images.length && shelter.images[0]
-                    ? `/${shelter.images[0]}`
+                    ? `/uploads/${shelter.images[0]}`
                     : '/img/placeholder.jpg';
                 return `
                 <div class="shelter-card bg-white p-6 rounded-2xl shadow-lg flex flex-col items-center">
@@ -71,7 +71,7 @@
                     <div class="mb-2 text-sm text-gray-500 text-center">Email: <span class="font-semibold">${shelter.contactEmail}</span></div>
                     ${shelter.shelterWebsite ? `<a href="${shelter.shelterWebsite}" target="_blank" class="text-primary hover:underline font-medium">Visit Website</a>` : ''}
                     ${shelter.images && shelter.images.length > 1 ? `<div class="mt-4 grid grid-cols-2 gap-2">${shelter.images.slice(1).map(image => {
-                        const extraImageUrl = image ? `/${image}` : '/img/placeholder.jpg';
+                        const extraImageUrl = image ? `/uploads/${image}` : '/img/placeholder.jpg';
                         return `<img src="${extraImageUrl}" alt="Shelter Image" class="shelter-img w-full h-24 object-cover rounded-lg">`;
                     }).join('')}</div>` : ''}
                 </div>
